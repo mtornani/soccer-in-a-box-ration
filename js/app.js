@@ -18,6 +18,16 @@ const App = {
     if (enterFieldBtn) {
       enterFieldBtn.addEventListener('click', () => this.enterFieldMode());
     }
+
+    const nextPhaseBtn = document.getElementById('next-phase-btn');
+    if (nextPhaseBtn) {
+      nextPhaseBtn.addEventListener('click', () => FieldManager.nextPhase());
+    }
+
+    const completeOpBtn = document.getElementById('complete-op-btn');
+    if (completeOpBtn) {
+      completeOpBtn.addEventListener('click', () => this.exitFieldMode());
+    }
   },
 
   async setupLogisticsUI() {
@@ -72,8 +82,15 @@ const App = {
       console.error('Transition failed:', error);
       alert(`TRANSITION FAILURE: ${error.message}`);
     }
+  },
+
+  exitFieldMode() {
+    console.log('App: Returning to LOGISTICS MODE...');
+    document.getElementById('field-mode').classList.add('hidden');
+    document.getElementById('logistics-mode').classList.remove('hidden');
+    this.setupLogisticsUI();
   }
-};
+}
 
 // Start the app
 App.init();
