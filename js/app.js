@@ -54,7 +54,7 @@ const App = {
   },
 
   async enterFieldMode() {
-    console.log('App: Transitioning to FIELD MODE...');
+    console.log('App: Requesting transition to FIELD MODE...');
 
     try {
       const rations = await LogisticsManager.listLocalRations();
@@ -71,12 +71,7 @@ const App = {
         throw new Error('Active ration data is corrupted or missing.');
       }
 
-      // Initialize Field Session
-      await FieldManager.initSession(activeRation);
-
-      // UI Transition
-      document.getElementById('logistics-mode').classList.add('hidden');
-      document.getElementById('field-mode').classList.remove('hidden');
+      await this.transitionToFieldMode(activeRation);
 
     } catch (error) {
       console.error('Transition failed:', error);
@@ -84,8 +79,34 @@ const App = {
     }
   },
 
+  /**
+   * Performs the UI and state transition into field mode.
+   * @param {object} ration - The ration to activate for this session.
+   */
+  async transitionToFieldMode(ration) {
+    console.log('App: Transitioning to FIELD MODE for ration:', ration.title);
+
+    // Initialize Field Session
+    await FieldManager.initSession(ration);
+
+    // UI Transition
+    document.getElementById('logistics-mode').classList.add('hidden');
+    document.getElementById('field-mode').classList.remove('hidden');
+  },
+
   exitFieldMode() {
+    this.returnToBase();
+  },
+
+  /**
+   * Returns the application to logistics mode and prepares for sync.
+   */
+  returnToBase() {
     console.log('App: Returning to LOGISTICS MODE...');
+
+    // In a real app, we would trigger a sync process here for local logs
+    console.log('App: Preparing local logs for sync...');
+
     document.getElementById('field-mode').classList.add('hidden');
     document.getElementById('logistics-mode').classList.remove('hidden');
     this.setupLogisticsUI();

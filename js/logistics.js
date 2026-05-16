@@ -35,6 +35,27 @@ export const LogisticsManager = {
   },
 
   /**
+   * Loads the test ration from the local assets folder.
+   * Used for testing and development.
+   */
+  async loadTestRation() {
+    try {
+      const response = await fetch('./assets/ration_test.json');
+      if (!response.ok) {
+        throw new Error(`Failed to load test ration: ${response.statusText}`);
+      }
+      const data = await response.json();
+      const rationId = data.id || 'test-001';
+      await StorageService.saveRation(rationId, data);
+      console.log(`Test ration ${rationId} loaded successfully.`);
+      return data;
+    } catch (error) {
+      console.error('Test Ration Load Error:', error.message);
+      throw error;
+    }
+  },
+
+  /**
    * Lists all rations currently stored locally.
    * @returns {Promise<string[]>} List of ration IDs.
    */
