@@ -42,8 +42,8 @@ export const FieldManager = {
 
     // Tactical Map (High-contrast SVG)
     const mapDiv = document.createElement('div');
-    mapDiv.style.marginBottom = '20px';
-    mapDiv.innerHTML = phase.map || '<div style="border: 1px solid var(--text-color); height: 100px; text-align: center; line-height: 100px;">[TACTICAL MAP UNAVAILABLE]</div>';
+    mapDiv.className = 'tactical-map';
+    mapDiv.innerHTML = phase.map || '<div style="border: 1px solid #FFFF00; height: 100px; text-align: center; line-height: 100px;">[TACTICAL MAP UNAVAILABLE]</div>';
     content.appendChild(mapDiv);
 
     // Coaching Points (PDC list)
@@ -65,14 +65,12 @@ export const FieldManager = {
     logContainer.style.marginTop = '20px';
 
     const btnFail = document.createElement('button');
-    btnFail.className = 'button';
+    btnFail.className = 'btn-brutal';
     btnFail.innerText = 'FAIL';
-    btnFail.style.borderColor = 'var(--danger-color)';
-    btnFail.style.color = 'var(--danger-color)';
     btnFail.onclick = () => this.nextPhase('FAIL');
 
     const btnSuccess = document.createElement('button');
-    btnSuccess.className = 'button';
+    btnSuccess.className = 'btn-brutal';
     btnSuccess.innerText = 'SUCCESS';
     btnSuccess.onclick = () => this.nextPhase('SUCCESS');
 
