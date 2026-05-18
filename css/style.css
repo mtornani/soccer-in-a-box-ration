@@ -184,11 +184,15 @@ h2 {
 }
 
 .base-ration-row {
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #1a1a1a;
+}
+
+.base-ration-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0.5rem 0;
-    border-bottom: 1px solid #1a1a1a;
+    margin-bottom: 0.4rem;
 }
 
 .base-ration-name {
@@ -196,27 +200,16 @@ h2 {
     color: var(--text-color);
 }
 
-.base-ration-actions {
-    display: flex;
-    gap: 6px;
-}
-
 .btn-small {
-    background: var(--accent-color);
-    color: var(--bg-color);
-    border: none;
-    font-family: 'Courier New', Courier, monospace;
-    font-weight: bold;
-    font-size: 0.75rem;
-    padding: 0.3rem 0.6rem;
-    cursor: pointer;
-    text-transform: uppercase;
-}
-
-.btn-small.btn-delete {
     background: transparent;
     color: #555;
     border: 1px solid #333;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    font-size: 0.7rem;
+    padding: 0.2rem 0.5rem;
+    cursor: pointer;
+    text-transform: uppercase;
 }
 
 .btn-small.btn-delete:active {

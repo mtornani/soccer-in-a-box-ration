@@ -33,11 +33,11 @@ export const BaseManager = {
     } else {
       el.innerHTML = rations.map(id => `
         <div class="base-ration-row">
-          <span class="base-ration-name">RATION_${id}</span>
-          <div class="base-ration-actions">
-            <button class="btn-small btn-deploy" data-id="${id}">${t('enterBtn')}</button>
+          <div class="base-ration-header">
+            <span class="base-ration-name">RATION_${id}</span>
             <button class="btn-small btn-delete" data-id="${id}">${t('deleteBtn')}</button>
           </div>
+          <button class="btn-brutal btn-deploy" data-id="${id}">${t('enterBtn')}</button>
         </div>
       `).join('');
 
