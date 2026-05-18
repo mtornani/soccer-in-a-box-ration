@@ -3,14 +3,28 @@ import { FieldManager } from './field.js';
 import { StorageService } from './storage.js';
 import { applyLang, getSavedLang, getCurrentLang, t } from './i18n.js';
 
+const BRIEFING_KEY = 'siab_briefing_seen';
+
 const App = {
   async init() {
     applyLang(getSavedLang());
     this.bindEvents();
+    this.showBriefingIfNeeded();
     this.setupLogisticsUI();
   },
 
+  showBriefingIfNeeded() {
+    if (localStorage.getItem(BRIEFING_KEY)) return;
+    document.getElementById('briefing-screen').classList.remove('hidden');
+  },
+
   bindEvents() {
+    document.getElementById('briefing-confirm-btn')
+      ?.addEventListener('click', () => {
+        localStorage.setItem(BRIEFING_KEY, '1');
+        document.getElementById('briefing-screen').classList.add('hidden');
+      });
+
     document.getElementById('load-test-btn')
       ?.addEventListener('click', () => this.loadTestRation());
 
@@ -27,7 +41,7 @@ const App = {
       ?.addEventListener('click', () => {
         const next = getCurrentLang() === 'it' ? 'en' : 'it';
         applyLang(next);
-        this.setupLogisticsUI(); // re-render dynamic list with new lang
+        this.setupLogisticsUI();
       });
   },
 

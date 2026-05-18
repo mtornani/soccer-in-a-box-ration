@@ -28,9 +28,14 @@ export const FieldManager = {
     title.innerText = `PHASE ${this.phaseIndex + 1}: ${phase.title}`;
     content.appendChild(title);
 
+    const mapLabel = document.createElement('div');
+    mapLabel.className = 'tactical-map-label';
+    mapLabel.innerText = t('tacticalMap');
+    content.appendChild(mapLabel);
+
     const mapDiv = document.createElement('div');
     mapDiv.className = 'tactical-map';
-    mapDiv.innerHTML = phase.map || '<div style="border: 1px solid #FFFF00; height: 100px; text-align: center; line-height: 100px;">[TACTICAL MAP UNAVAILABLE]</div>';
+    mapDiv.innerHTML = phase.map || '<div style="height: 60px; text-align: center; line-height: 60px; color: #444;">—</div>';
     content.appendChild(mapDiv);
 
     const cpList = document.createElement('ul');

@@ -9,6 +9,27 @@
 <body class="tactical-dark">
     <button id="lang-toggle" class="lang-toggle">EN</button>
 
+    <!-- BRIEFING SPLASH -->
+    <div id="briefing-screen" class="briefing-screen hidden">
+        <div class="briefing-content">
+            <h1 data-i18n="briefingTitle">// BRIEFING //</h1>
+            <div class="briefing-body">
+                <p data-i18n="briefingLine1">SISTEMA: SOCCER IN A BOX — RATION</p>
+                <p data-i18n="briefingLine2">MISSIONE: ESEGUIRE SESSIONE DI ALLENAMENTO STRUTTURATA</p>
+                <div class="briefing-divider">---</div>
+                <p class="briefing-label" data-i18n="briefingStep1Label">[ FASE 1 — LOGISTICA ]</p>
+                <p data-i18n="briefingStep1">Carica una razione. La razione contiene le fasi dell'allenamento, i punti di coaching e la durata.</p>
+                <p class="briefing-label" data-i18n="briefingStep2Label">[ FASE 2 — CAMPO ]</p>
+                <p data-i18n="briefingStep2">Esegui le fasi in sequenza. Per ogni fase: leggi i punti, osserva la mappa tattica, segna SUCCESSO o FALLITO.</p>
+                <p class="briefing-label" data-i18n="briefingStep3Label">[ FASE 3 — BASE ]</p>
+                <p data-i18n="briefingStep3">Al termine torna alla base. I log vengono salvati localmente per il debriefing.</p>
+                <div class="briefing-divider">---</div>
+                <p class="briefing-warn" data-i18n="briefingWarn">FUNZIONA OFFLINE. NESSUNA CONNESSIONE NECESSARIA IN CAMPO.</p>
+            </div>
+            <button class="btn-brutal" id="briefing-confirm-btn" data-i18n="briefingConfirm">RICEVUTO — INIZIA</button>
+        </div>
+    </div>
+
     <div class="container">
         <div id="logistics-mode" class="mode-container">
             <h1 data-i18n="logisticsTitle">MODALITÀ LOGISTICA</h1>
