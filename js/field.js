@@ -9,20 +9,12 @@ export const FieldManager = {
   phaseIndex: 0,
   timerInterval: null,
 
-  /**
-   * Initializes a field session for a specific ration.
-   * @param {object} ration - The validated ration data.
-   */
   async initSession(ration) {
-    console.log('FieldManager: Initializing session for ration:', ration.title);
     this.currentRation = ration;
     this.phaseIndex = 0;
     this.renderPhase();
   },
 
-  /**
-   * Renders the current operational phase.
-   */
   renderPhase() {
     const content = document.getElementById('phase-content');
     const ration = this.currentRation;
@@ -35,18 +27,15 @@ export const FieldManager = {
     const phase = ration.phases[this.phaseIndex];
     content.innerHTML = '';
 
-    // Phase Title
     const title = document.createElement('h2');
     title.innerText = `PHASE ${this.phaseIndex + 1}: ${phase.title}`;
     content.appendChild(title);
 
-    // Tactical Map (High-contrast SVG)
     const mapDiv = document.createElement('div');
     mapDiv.className = 'tactical-map';
     mapDiv.innerHTML = phase.map || '<div style="border: 1px solid #FFFF00; height: 100px; text-align: center; line-height: 100px;">[TACTICAL MAP UNAVAILABLE]</div>';
     content.appendChild(mapDiv);
 
-    // Coaching Points (PDC list)
     const cpList = document.createElement('ul');
     cpList.style.listStyle = 'none';
     cpList.style.padding = '0';
@@ -58,7 +47,6 @@ export const FieldManager = {
     });
     content.appendChild(cpList);
 
-    // Binary Log Buttons
     const logContainer = document.createElement('div');
     logContainer.style.display = 'flex';
     logContainer.style.gap = '10px';
@@ -67,18 +55,19 @@ export const FieldManager = {
     const btnFail = document.createElement('button');
     btnFail.className = 'btn-brutal';
     btnFail.innerText = 'FAIL';
+    btnFail.style.flex = '1';
     btnFail.onclick = () => this.nextPhase('FAIL');
 
     const btnSuccess = document.createElement('button');
     btnSuccess.className = 'btn-brutal';
     btnSuccess.innerText = 'SUCCESS';
+    btnSuccess.style.flex = '1';
     btnSuccess.onclick = () => this.nextPhase('SUCCESS');
 
     logContainer.appendChild(btnFail);
     logContainer.appendChild(btnSuccess);
     content.appendChild(logContainer);
 
-    // Timer
     if (phase.duration) {
       this.startTimer(phase.duration);
     } else {
@@ -87,10 +76,6 @@ export const FieldManager = {
     }
   },
 
-  /**
-   * Starts a high-visibility countdown timer.
-   * @param {number} durationMinutes - Duration in minutes.
-   */
   startTimer(durationMinutes) {
     this.stopTimer();
     let seconds = durationMinutes * 60;
@@ -115,19 +100,15 @@ export const FieldManager = {
       clearInterval(this.timerInterval);
       this.timerInterval = null;
     }
-    document.getElementById('phase-timer').style.color = 'var(--accent-color)';
+    const timerEl = document.getElementById('phase-timer');
+    if (timerEl) timerEl.style.color = 'var(--accent-color)';
   },
 
-  /**
-   * Logs previous phase and transitions to next.
-   * @param {string|null} result - Result of the phase ('SUCCESS', 'FAIL', or null).
-   */
   async nextPhase(result = null) {
     const ration = this.currentRation;
     if (!ration) return;
 
-    // Log the result
-    if (result) {
+    if (result && ration.phases[this.phaseIndex]) {
       await StorageService.saveLog(ration.id, {
         phaseIndex: this.phaseIndex,
         phaseTitle: ration.phases[this.phaseIndex].title,
@@ -142,7 +123,7 @@ export const FieldManager = {
 
   showOperationComplete() {
     const content = document.getElementById('phase-content');
-    content.innerHTML = '<h2>OPERATION COMPLETE</h2><p>All phases executed. Return to logistics for debrief.</p>';
+    content.innerHTML = '<h2>OPERATION COMPLETE</h2><p>All phases executed. Return to base for debrief.</p>';
     this.stopTimer();
     document.getElementById('phase-timer').innerText = '00:00';
   }

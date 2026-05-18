@@ -14,19 +14,26 @@ const App = {
   },
 
   bindEvents() {
-    const enterFieldBtn = document.getElementById('enter-field-btn');
-    if (enterFieldBtn) {
-      enterFieldBtn.addEventListener('click', () => this.enterFieldMode());
-    }
+    document.getElementById('load-test-btn')
+      ?.addEventListener('click', () => this.loadTestRation());
 
-    const nextPhaseBtn = document.getElementById('next-phase-btn');
-    if (nextPhaseBtn) {
-      nextPhaseBtn.addEventListener('click', () => FieldManager.nextPhase());
-    }
+    document.getElementById('enter-field-btn')
+      ?.addEventListener('click', () => this.enterFieldMode());
 
-    const completeOpBtn = document.getElementById('complete-op-btn');
-    if (completeOpBtn) {
-      completeOpBtn.addEventListener('click', () => this.exitFieldMode());
+    document.getElementById('next-phase-btn')
+      ?.addEventListener('click', () => FieldManager.nextPhase());
+
+    document.getElementById('back-to-base-btn')
+      ?.addEventListener('click', () => this.exitFieldMode());
+  },
+
+  async loadTestRation() {
+    try {
+      await LogisticsManager.loadTestRation();
+      this.setupLogisticsUI();
+    } catch (e) {
+      console.error('Failed to load test ration:', e);
+      alert('LOAD FAILURE: ' + e.message);
     }
   },
 
@@ -37,11 +44,10 @@ const App = {
     try {
       const rations = await LogisticsManager.listLocalRations();
       if (rations.length === 0) {
-        rationListEl.innerHTML = '<div class="ration-item">NO RATIONS LOADED</div>';
+        rationListEl.innerHTML = '<div class="ration-item"><span>NO RATIONS LOADED</span><span>[EMPTY]</span></div>';
         return;
       }
 
-      // Simple render of available rations
       rationListEl.innerHTML = rations.map(id => `
         <div class="ration-item">
           <span>RATION_${id}</span>
@@ -54,64 +60,35 @@ const App = {
   },
 
   async enterFieldMode() {
-    console.log('App: Requesting transition to FIELD MODE...');
-
     try {
       const rations = await LogisticsManager.listLocalRations();
       if (rations.length === 0) {
-        alert('CRITICAL ERROR: No active rations found. Logistics failure.');
+        alert('NO RATIONS LOADED. Use LOAD TEST RATION first.');
         return;
       }
 
-      // Use the first available ration as the active one
       const activeRationId = rations[0];
       const activeRation = await StorageService.getRation(activeRationId);
 
       if (!activeRation) {
-        throw new Error('Active ration data is corrupted or missing.');
+        throw new Error('Ration data corrupted or missing.');
       }
 
-      await this.transitionToFieldMode(activeRation);
-
+      await FieldManager.initSession(activeRation);
+      document.getElementById('logistics-mode').classList.add('hidden');
+      document.getElementById('field-mode').classList.remove('hidden');
     } catch (error) {
       console.error('Transition failed:', error);
-      alert(`TRANSITION FAILURE: ${error.message}`);
+      alert('TRANSITION FAILURE: ' + error.message);
     }
   },
 
-  /**
-   * Performs the UI and state transition into field mode.
-   * @param {object} ration - The ration to activate for this session.
-   */
-  async transitionToFieldMode(ration) {
-    console.log('App: Transitioning to FIELD MODE for ration:', ration.title);
-
-    // Initialize Field Session
-    await FieldManager.initSession(ration);
-
-    // UI Transition
-    document.getElementById('logistics-mode').classList.add('hidden');
-    document.getElementById('field-mode').classList.remove('hidden');
-  },
-
   exitFieldMode() {
-    this.returnToBase();
-  },
-
-  /**
-   * Returns the application to logistics mode and prepares for sync.
-   */
-  returnToBase() {
-    console.log('App: Returning to LOGISTICS MODE...');
-
-    // In a real app, we would trigger a sync process here for local logs
-    console.log('App: Preparing local logs for sync...');
-
+    FieldManager.stopTimer();
     document.getElementById('field-mode').classList.add('hidden');
     document.getElementById('logistics-mode').classList.remove('hidden');
     this.setupLogisticsUI();
   }
 }
 
-// Start the app
 App.init();
