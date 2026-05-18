@@ -1,9 +1,9 @@
 /**
  * StorageService — offline-first persistence.
  * Uses localStorage in browser, Capacitor Preferences in native app.
+ * No top-level await — safe for all browsers and GitHub Pages.
  */
 
-// Browser-compatible Preferences shim
 const BrowserPreferences = {
   async set({ key, value }) {
     localStorage.setItem(key, value);
@@ -23,40 +23,49 @@ const BrowserPreferences = {
   }
 };
 
-// Try Capacitor native, fallback to localStorage
-let Prefs = BrowserPreferences;
-try {
-  if (window.Capacitor?.isNativePlatform()) {
-    const mod = await import('@capacitor/preferences');
-    Prefs = mod.Preferences;
+async function getPrefs() {
+  if (
+    typeof window !== 'undefined' &&
+    window.Capacitor != null &&
+    typeof window.Capacitor.isNativePlatform === 'function' &&
+    window.Capacitor.isNativePlatform()
+  ) {
+    try {
+      const mod = await import('@capacitor/preferences');
+      return mod.Preferences;
+    } catch (e) { /* fallback */ }
   }
-} catch (e) {
-  // Stay on browser shim
+  return BrowserPreferences;
 }
 
 export const StorageService = {
   async saveRation(id, data) {
-    await Prefs.set({ key: `ration_${id}`, value: JSON.stringify(data) });
+    const p = await getPrefs();
+    await p.set({ key: `ration_${id}`, value: JSON.stringify(data) });
   },
 
   async getRation(id) {
-    const { value } = await Prefs.get({ key: `ration_${id}` });
+    const p = await getPrefs();
+    const { value } = await p.get({ key: `ration_${id}` });
     return value ? JSON.parse(value) : null;
   },
 
   async saveLog(sessionId, logData) {
     const logs = await this.getLog(sessionId);
+    const p = await getPrefs();
     logs.push(logData);
-    await Prefs.set({ key: `log_${sessionId}`, value: JSON.stringify(logs) });
+    await p.set({ key: `log_${sessionId}`, value: JSON.stringify(logs) });
   },
 
   async getLog(sessionId) {
-    const { value } = await Prefs.get({ key: `log_${sessionId}` });
+    const p = await getPrefs();
+    const { value } = await p.get({ key: `log_${sessionId}` });
     return value ? JSON.parse(value) : [];
   },
 
   async getRationsList() {
-    const { keys } = await Prefs.keys();
+    const p = await getPrefs();
+    const { keys } = await p.keys();
     return keys
       .filter(key => key.startsWith('ration_'))
       .map(key => key.replace('ration_', ''));
