@@ -69,5 +69,25 @@ export const StorageService = {
     return keys
       .filter(key => key.startsWith('ration_'))
       .map(key => key.replace('ration_', ''));
+  },
+
+  async getAllLogs() {
+    const p = await getPrefs();
+    const { keys } = await p.keys();
+    const logKeys = keys.filter(k => k.startsWith('log_'));
+    const results = [];
+    for (const key of logKeys) {
+      const { value } = await p.get({ key });
+      if (value) {
+        results.push({ sessionId: key.replace('log_', ''), logs: JSON.parse(value) });
+      }
+    }
+    return results;
+  },
+
+  async deleteRation(id) {
+    const p = await getPrefs();
+    await p.remove({ key: `ration_${id}` });
+    await p.remove({ key: `log_${id}` });
   }
 };

@@ -18,11 +18,11 @@
                 <p data-i18n="briefingLine2">MISSIONE: ESEGUIRE SESSIONE DI ALLENAMENTO STRUTTURATA</p>
                 <div class="briefing-divider">---</div>
                 <p class="briefing-label" data-i18n="briefingStep1Label">[ FASE 1 — LOGISTICA ]</p>
-                <p data-i18n="briefingStep1">Carica una razione. La razione contiene le fasi dell'allenamento, i punti di coaching e la durata.</p>
+                <p data-i18n="briefingStep1">Carica una razione dalla BASE.</p>
                 <p class="briefing-label" data-i18n="briefingStep2Label">[ FASE 2 — CAMPO ]</p>
-                <p data-i18n="briefingStep2">Esegui le fasi in sequenza. Per ogni fase: leggi i punti, osserva la mappa tattica, segna SUCCESSO o FALLITO.</p>
+                <p data-i18n="briefingStep2">Esegui le fasi in sequenza. Segna SUCCESSO o FALLITO.</p>
                 <p class="briefing-label" data-i18n="briefingStep3Label">[ FASE 3 — BASE ]</p>
-                <p data-i18n="briefingStep3">Al termine torna alla base. I log vengono salvati localmente per il debriefing.</p>
+                <p data-i18n="briefingStep3">Torna alla base. I log vengono salvati per il debriefing.</p>
                 <div class="briefing-divider">---</div>
                 <p class="briefing-warn" data-i18n="briefingWarn">FUNZIONA OFFLINE. NESSUNA CONNESSIONE NECESSARIA IN CAMPO.</p>
             </div>
@@ -31,28 +31,31 @@
     </div>
 
     <div class="container">
-        <div id="logistics-mode" class="mode-container">
-            <h1 data-i18n="logisticsTitle">MODALITÀ LOGISTICA</h1>
-            <p data-i18n="rationPack">RAZIONE: SOCCER-RATION-01</p>
-            <div id="ration-list">
-                <div class="ration-item">
-                    <span data-i18n="noRations">NESSUNA RAZIONE CARICATA</span>
-                    <span>[<span data-i18n="rationEmpty">VUOTA</span>]</span>
-                </div>
+
+        <!-- BASE MODE -->
+        <div id="base-mode" class="mode-container">
+            <h1 data-i18n="baseTitle">BASE — COMANDO</h1>
+
+            <h2 data-i18n="rationsSectionTitle">RAZIONI DISPONIBILI</h2>
+            <div id="base-ration-list"></div>
+            <div id="base-load-actions">
+                <button class="btn-brutal" id="base-load-test-btn" data-i18n="loadTestBtn">CARICA RAZIONE TEST</button>
+                <button class="btn-brutal btn-outline" id="base-load-url-btn" data-i18n="loadUrlBtn">CARICA DA URL</button>
             </div>
-            <button class="btn-brutal" id="load-test-btn" data-i18n="loadBtn">CARICA RAZIONE TEST</button>
-            <button class="btn-brutal" id="enter-field-btn" data-i18n="enterFieldBtn">ENTRA IN CAMPO</button>
+
+            <h2 data-i18n="debriefSectionTitle">DEBRIEFING — SESSIONI</h2>
+            <div id="base-debrief-list"></div>
         </div>
 
+        <!-- FIELD MODE -->
         <div id="field-mode" class="mode-container hidden">
             <h1 data-i18n="fieldTitle">MODALITÀ CAMPO: OPERATIVA</h1>
             <div id="phase-timer">00:00</div>
-            <div id="phase-content">
-                READY FOR DEPLOYMENT...
-            </div>
+            <div id="phase-content">READY FOR DEPLOYMENT...</div>
             <button class="btn-brutal" id="next-phase-btn" data-i18n="nextPhaseBtn">FASE SUCCESSIVA</button>
-            <button class="btn-brutal" id="back-to-base-btn" data-i18n="returnBtn">TORNA ALLA BASE</button>
+            <button class="btn-brutal btn-outline" id="back-to-base-btn" data-i18n="returnBtn">TORNA ALLA BASE</button>
         </div>
+
     </div>
     <script type="module" src="js/app.js"></script>
 </body>

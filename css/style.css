@@ -165,3 +165,151 @@ p {
     padding: 4px;
     margin-bottom: 1rem;
 }
+
+/* BASE MODE */
+h2 {
+    color: var(--accent-color);
+    font-size: 0.85rem;
+    letter-spacing: 3px;
+    border-bottom: 1px solid #333;
+    padding-bottom: 0.4rem;
+    margin: 1.5rem 0 0.75rem;
+}
+
+.base-empty {
+    color: #555;
+    font-size: 0.85rem;
+    text-align: left;
+    margin: 0.5rem 0;
+}
+
+.base-ration-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #1a1a1a;
+}
+
+.base-ration-name {
+    font-size: 0.9rem;
+    color: var(--text-color);
+}
+
+.base-ration-actions {
+    display: flex;
+    gap: 6px;
+}
+
+.btn-small {
+    background: var(--accent-color);
+    color: var(--bg-color);
+    border: none;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    font-size: 0.75rem;
+    padding: 0.3rem 0.6rem;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+.btn-small.btn-delete {
+    background: transparent;
+    color: #555;
+    border: 1px solid #333;
+}
+
+.btn-small.btn-delete:active {
+    color: var(--danger-color);
+    border-color: var(--danger-color);
+}
+
+.btn-outline {
+    background: transparent;
+    color: var(--accent-color);
+    border: 1px solid var(--accent-color);
+}
+
+.btn-outline:active {
+    background: var(--accent-color);
+    color: var(--bg-color);
+}
+
+/* DEBRIEF */
+.debrief-session {
+    border-bottom: 1px solid #1a1a1a;
+}
+
+.debrief-summary {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0.5rem 0;
+    cursor: pointer;
+    font-size: 0.8rem;
+}
+
+.debrief-summary:hover .debrief-id {
+    color: var(--accent-color);
+}
+
+.debrief-date {
+    color: #555;
+    min-width: 60px;
+}
+
+.debrief-id {
+    color: var(--text-color);
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.debrief-bar {
+    color: var(--accent-color);
+    letter-spacing: 1px;
+    font-size: 0.75rem;
+}
+
+.debrief-pct {
+    color: #888;
+    min-width: 36px;
+    text-align: right;
+}
+
+.debrief-detail {
+    padding: 0.4rem 0 0.6rem 1rem;
+    border-left: 2px solid #222;
+    margin-bottom: 0.4rem;
+}
+
+.debrief-detail.hidden {
+    display: none;
+}
+
+.debrief-phase-row {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    font-size: 0.78rem;
+    padding: 2px 0;
+}
+
+.debrief-phase-name {
+    flex: 1;
+    color: #888;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.result-success { color: var(--accent-color); font-weight: bold; }
+.result-fail    { color: var(--danger-color); font-weight: bold; }
+
+.debrief-phase-time {
+    color: #444;
+    font-size: 0.7rem;
+    min-width: 50px;
+    text-align: right;
+}
