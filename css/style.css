@@ -1,0 +1,80 @@
+:root {
+    --accent-color: #FFFF00;
+    --danger-color: #FF0000;
+    --bg-color: #000000;
+    --text-color: #FFFFFF;
+}
+
+body.tactical-dark {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: 'Courier New', Courier, monospace;
+    margin: 0;
+    padding: 1rem;
+}
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+h1, h2, #phase-timer {
+    color: var(--accent-color);
+    text-transform: uppercase;
+    font-weight: bold;
+    text-align: center;
+}
+
+#phase-timer {
+    font-size: 4rem;
+}
+
+.btn-brutal {
+    background-color: var(--accent-color);
+    color: var(--bg-color);
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 1rem 2rem;
+    font-size: 1.5rem;
+    border: none;
+    cursor: pointer;
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+    text-align: center;
+}
+
+.btn-brutal:active {
+    opacity: 0.8;
+}
+
+.mode-container.hidden {
+    display: none;
+}
+
+.ration-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #333;
+}
+
+.tactical-map svg {
+    width: 100%;
+    height: auto;
+}
+
+#phase-content ul {
+    list-style: none;
+    padding: 0;
+}
+
+#phase-content li {
+    margin-bottom: 5px;
+    color: var(--text-color);
+}
+
+p {
+    text-align: center;
+    color: #888;
+}

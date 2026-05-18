@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SoccerInABox - Ration</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="tactical-dark">
+    <div class="container">
+        <div id="logistics-mode" class="mode-container">
+            <h1>LOGISTICS MODE</h1>
+            <p>RATION PACK: SOCCER-RATION-01</p>
+            <div id="ration-list">
+                <div class="ration-item">
+                    <span>EQUIPMENT: CHECKED</span>
+                    <span>[OK]</span>
+                </div>
+            </div>
+            <button class="btn-brutal" id="load-test-btn">LOAD TEST RATION</button>
+            <button class="btn-brutal" id="enter-field-btn">ENTER FIELD MODE</button>
+        </div>
+
+        <div id="field-mode" class="mode-container hidden">
+            <h1>FIELD MODE: OPERATIONAL</h1>
+            <div id="phase-timer">00:00</div>
+            <div id="phase-content">
+                READY FOR DEPLOYMENT...
+            </div>
+            <button class="btn-brutal" id="next-phase-btn">NEXT PHASE</button>
+            <button class="btn-brutal" id="back-to-base-btn">RETURN TO BASE</button>
+        </div>
+    </div>
+    <script type="module" src="js/app.js"></script>
+</body>
+</html>
