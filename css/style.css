@@ -78,3 +78,24 @@ p {
     text-align: center;
     color: #888;
 }
+
+.lang-toggle {
+    position: fixed;
+    top: 0.75rem;
+    right: 0.75rem;
+    background: transparent;
+    color: var(--accent-color);
+    border: 1px solid var(--accent-color);
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.75rem;
+    font-weight: bold;
+    padding: 0.25rem 0.5rem;
+    cursor: pointer;
+    z-index: 100;
+    letter-spacing: 1px;
+}
+
+.lang-toggle:active {
+    background: var(--accent-color);
+    color: var(--bg-color);
+}

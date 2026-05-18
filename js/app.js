@@ -1,14 +1,11 @@
 import { LogisticsManager } from './logistics.js';
 import { FieldManager } from './field.js';
 import { StorageService } from './storage.js';
+import { applyLang, getSavedLang, getCurrentLang, t } from './i18n.js';
 
-/**
- * App coordinator for Soccer In A Box - Military Ration.
- * Manages high-level state transitions between Logistics and Field modes.
- */
 const App = {
   async init() {
-    console.log('App: Initializing Tactical Interface...');
+    applyLang(getSavedLang());
     this.bindEvents();
     this.setupLogisticsUI();
   },
@@ -25,6 +22,13 @@ const App = {
 
     document.getElementById('back-to-base-btn')
       ?.addEventListener('click', () => this.exitFieldMode());
+
+    document.getElementById('lang-toggle')
+      ?.addEventListener('click', () => {
+        const next = getCurrentLang() === 'it' ? 'en' : 'it';
+        applyLang(next);
+        this.setupLogisticsUI(); // re-render dynamic list with new lang
+      });
   },
 
   async loadTestRation() {
@@ -33,7 +37,7 @@ const App = {
       this.setupLogisticsUI();
     } catch (e) {
       console.error('Failed to load test ration:', e);
-      alert('LOAD FAILURE: ' + e.message);
+      alert(t('loadError') + e.message);
     }
   },
 
@@ -44,14 +48,14 @@ const App = {
     try {
       const rations = await LogisticsManager.listLocalRations();
       if (rations.length === 0) {
-        rationListEl.innerHTML = '<div class="ration-item"><span>NO RATIONS LOADED</span><span>[EMPTY]</span></div>';
+        rationListEl.innerHTML = `<div class="ration-item"><span>${t('noRations')}</span><span>[${t('rationEmpty')}]</span></div>`;
         return;
       }
 
       rationListEl.innerHTML = rations.map(id => `
         <div class="ration-item">
           <span>RATION_${id}</span>
-          <span>[READY]</span>
+          <span>[${t('rationReady')}]</span>
         </div>
       `).join('');
     } catch (e) {
@@ -63,7 +67,7 @@ const App = {
     try {
       const rations = await LogisticsManager.listLocalRations();
       if (rations.length === 0) {
-        alert('NO RATIONS LOADED. Use LOAD TEST RATION first.');
+        alert(t('noRationsAlert'));
         return;
       }
 
@@ -79,7 +83,7 @@ const App = {
       document.getElementById('field-mode').classList.remove('hidden');
     } catch (error) {
       console.error('Transition failed:', error);
-      alert('TRANSITION FAILURE: ' + error.message);
+      alert(t('transitionError') + error.message);
     }
   },
 
@@ -89,6 +93,6 @@ const App = {
     document.getElementById('logistics-mode').classList.remove('hidden');
     this.setupLogisticsUI();
   }
-}
+};
 
 App.init();

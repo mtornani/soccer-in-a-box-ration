@@ -1,8 +1,5 @@
-/**
- * FieldManager handles the operational phase of the mission.
- * Coordinates timers, phase transitions and logging.
- */
 import { StorageService } from './storage.js';
+import { t } from './i18n.js';
 
 export const FieldManager = {
   currentRation: null,
@@ -54,13 +51,13 @@ export const FieldManager = {
 
     const btnFail = document.createElement('button');
     btnFail.className = 'btn-brutal';
-    btnFail.innerText = 'FAIL';
+    btnFail.innerText = t('fail');
     btnFail.style.flex = '1';
     btnFail.onclick = () => this.nextPhase('FAIL');
 
     const btnSuccess = document.createElement('button');
     btnSuccess.className = 'btn-brutal';
-    btnSuccess.innerText = 'SUCCESS';
+    btnSuccess.innerText = t('success');
     btnSuccess.style.flex = '1';
     btnSuccess.onclick = () => this.nextPhase('SUCCESS');
 
@@ -72,7 +69,7 @@ export const FieldManager = {
       this.startTimer(phase.duration);
     } else {
       this.stopTimer();
-      document.getElementById('phase-timer').innerText = 'NO TIMER';
+      document.getElementById('phase-timer').innerText = t('noTimer');
     }
   },
 
@@ -89,7 +86,7 @@ export const FieldManager = {
 
       if (seconds <= 0) {
         this.stopTimer();
-        timerEl.innerText = 'TIME EXPIRED';
+        timerEl.innerText = t('timeExpired');
         timerEl.style.color = 'var(--danger-color)';
       }
     }, 1000);
@@ -123,7 +120,7 @@ export const FieldManager = {
 
   showOperationComplete() {
     const content = document.getElementById('phase-content');
-    content.innerHTML = '<h2>OPERATION COMPLETE</h2><p>All phases executed. Return to base for debrief.</p>';
+    content.innerHTML = `<h2>${t('opComplete')}</h2><p>${t('opCompleteMsg')}</p>`;
     this.stopTimer();
     document.getElementById('phase-timer').innerText = '00:00';
   }
