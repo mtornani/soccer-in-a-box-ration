@@ -1,0 +1,41 @@
+body.tactical-dark {
+    background-color: #000000;
+    color: #FFFFFF;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+h1, h2, #phase-timer {
+    color: #FFFF00;
+    text-transform: uppercase;
+    font-weight: bold;
+    text-align: center;
+}
+
+#phase-timer {
+    font-size: 4rem;
+}
+
+.btn-brutal {
+    background-color: #FFFF00;
+    color: #000000;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 1rem 2rem;
+    font-size: 1.5rem;
+    border: none;
+    cursor: pointer;
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+    text-align: center;
+}
+
+.mode-container.hidden {
+    display: none;
+}
+
+.tactical-map svg {
+    width: 100%;
+    height: auto;
+    filter: invert(1) hue-rotate(180deg);
+}

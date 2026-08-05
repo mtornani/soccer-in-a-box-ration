@@ -1,0 +1,50 @@
+[
+  {
+    "id": "ex001",
+    "title": "Wall Pass",
+    "description": "A simple one-touch pass against a wall to improve passing accuracy and first touch.",
+    "ageMin": 6,
+    "ageMax": 45,
+    "category": "technical",
+    "participantsMin": 1,
+    "equipment": ["ball", "wall"],
+    "instructions": "Stand 2-3 meters from a wall. Pass the ball against the wall using the inside of your foot, control the rebound, and repeat. Alternate feet.",
+    "source": "Public domain coaching manual"
+  },
+  {
+    "id": "ex002",
+    "title": "Cone Dribbling",
+    "description": "Dribble through a line of cones using both feet to improve close control.",
+    "ageMin": 6,
+    "ageMax": 45,
+    "category": "technical",
+    "participantsMin": 1,
+    "equipment": ["ball", "cones (5)"],
+    "instructions": "Place cones in a straight line 1 meter apart. Dribble through the cones using quick touches, alternating feet. Return to start and repeat.",
+    "source": "Public domain coaching manual"
+  },
+  {
+    "id": "ex003",
+    "title": "Shuttle Runs",
+    "description": "Sprint between two points to improve acceleration and anaerobic fitness.",
+    "ageMin": 12,
+    "ageMax": 45,
+    "category": "athletic",
+    "participantsMin": 1,
+    "equipment": ["cones (2)"],
+    "instructions": "Place two cones 20 meters apart. Sprint from one cone to the other, touch the ground, and sprint back. Repeat for desired repetitions.",
+    "source": "Public domain fitness guide"
+  },
+  {
+    "id": "ex004",
+    "title": "Heading Practice",
+    "description": "Throw the ball against a wall and head it back to improve heading accuracy and timing.",
+    "ageMin": 14,
+    "ageMax": 45,
+    "category": "technical",
+    "participantsMin": 1,
+    "equipment": ["ball", "wall"],
+    "instructions": "Stand 2 meters from a wall. Throw the ball against the wall and attempt to head it back at a specific point on the wall. Repeat.",
+    "source": "Public domain coaching manual"
+  }
+]
