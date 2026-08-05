@@ -7,11 +7,14 @@ import { StorageService, ExerciseStorage } from './storage.js';
  * Manages high-level state transitions between Logistics and Field modes.
  */
 const App = {
+  exercises: [], // array of exercise objects
+
   async init() {
     console.log('App: Initializing Tactical Interface...');
     this.bindEvents();
     this.setupLogisticsUI();
     await this.loadExercises();
+    this.bindExerciseEvents();
   },
 
   /**
@@ -27,16 +30,22 @@ const App = {
           .catch(() => null);
         if (bundled) {
           await ExerciseStorage.save(bundled);
+          this.exercises = bundled;
           console.log('App: Loaded bundled exercises');
         } else {
+          this.exercises = [];
           console.warn('App: No exercise data available');
         }
       } else {
-        console.log('App: Loaded cached exercises');
+        this.exercises = stored;
+        console.log(`App: Loaded ${stored.length} exercises from storage`);
       }
     } catch (e) {
       console.error('Failed to load exercises:', e);
+      this.exercises = [];
     }
+    // initial render if exercise view is already visible (should be hidden)
+    this.renderExercises();
   },
 
   bindEvents() {
@@ -136,8 +145,101 @@ const App = {
     document.getElementById('field-mode').classList.add('hidden');
     document.getElementById('logistics-mode').classList.remove('hidden');
     this.setupLogisticsUI();
+  },
+
+  /* ---------- Exercise UI ---------- */
+
+  bindExerciseEvents() {
+    const showExercisesBtn = document.getElementById('show-exercises-btn');
+    if (showExercisesBtn) {
+      showExercisesBtn.addEventListener('click', () => this.toggleExercisesView());
+    }
+
+    const categoryFilter = document.getElementById('category-filter');
+    if (categoryFilter) {
+      categoryFilter.addEventListener('change', () => this.applyFilters());
+    }
+
+    const ageFilter = document.getElementById('age-filter');
+    if (ageFilter) {
+      const ageValueSpan = document.getElementById('age-value');
+      if (ageValueSpan) {
+        ageFilter.addEventListener('input', () => {
+          ageValueSpan.textContent = ageFilter.value;
+          this.applyFilters();
+        });
+      }
+    }
+
+    const participantsFilter = document.getElementById('participants-filter');
+    if (participantsFilter) {
+      participantsFilter.addEventListener('input', () => this.applyFilters());
+    }
+  },
+
+  toggleExercisesView() {
+    const logistics = document.getElementById('logistics-mode');
+    const field = document.getElementById('field-mode');
+    const exercisesSection = document.getElementById('exercises-section');
+
+    // hide other modes
+    if (logistics) logistics.classList.add('hidden');
+    if (field)    field.classList.add('hidden');
+    // show exercises
+    if (exercisesSection) {
+      exercisesSection.classList.remove('hidden');
+      exercisesSection.classList.add('visible');
+      this.renderExercises();
+    }
+  },
+
+  applyFilters() {
+    const categoryFilter = document.getElementById('category-filter');
+    const ageFilter = document.getElementById('age-filter');
+    const participantsFilter = document.getElementById('participants-filter');
+
+    const cat = categoryFilter ? categoryFilter.value : 'all';
+    const maxAge = ageFilter ? parseInt(ageFilter.value, 10) : 45;
+    const minParticipants = participantsFilter ? parseInt(participantsFilter.value, 10) : 1;
+
+    const filtered = this.exercises.filter(ex => {
+      if (cat !== 'all' && ex.category !== cat) return false;
+      // age filter: user selects maximum age they want; exercise suitable if its min age <= maxAge
+      if (ex.ageMin > maxAge) return false;
+      // participants filter: user selects minimum participants they have; exercise suitable if its participantsMin <= participantsFilter? Actually we have participantsMin as minimum needed. If user says they have X participants, exercise needs participantsMin <= X.
+      if (ex.participantsMin > minParticipants) return false;
+      return true;
+    });
+
+    this.renderExercises(filtered);
+  },
+
+  /**
+   * Render exercise cards into the grid.
+   * @param {Array} list - optional array to render; if undefined, use this.exercises
+   */
+  renderExercises(list) {
+    const grid = document.getElementById('exercises-grid');
+    if (!grid) return;
+    const data = Array.isArray(list) ? list : this.exercises;
+    if (data.length === 0) {
+      grid.innerHTML = '<p class="no-exercises">No exercises match the current filters.</p>';
+      return;
+    }
+    grid.innerHTML = data.map(ex => `
+      <div class="exercise-card">
+        <h3>${ex.title}</h3>
+        <div class="meta">
+          <span>${ex.category}</span>
+          <span>${ex.ageMin}+</span>
+          <span>${ex.participantsMin}+ players</span>
+        </div>
+        <p>${ex.description}</p>
+        <div class="source"><em>${ex.source}</em></div>
+      </div>
+    `).join('');
   }
-}
+};
 
 // Start the app
 App.init();

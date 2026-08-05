@@ -1,6 +1,6 @@
 // Service Worker for SoccerInABox PWA
-const CACHE_STATIC = 'static-v1';
-const CACHE_DATA = 'data-v1';
+const CACHE_STATIC = 'static-v2';
+const CACHE_DATA = 'data-v2';
 const ASSETS_TO_CACHE = [
   '/',
   '/index.html',
@@ -10,7 +10,10 @@ const ASSETS_TO_CACHE = [
   '/js/field.js',
   '/js/storage.js',
   '/manifest.json',
-  '/assets/ration_test.json'
+  '/assets/ration_test.json',
+  '/assets/data/exercises.json',
+  // Google Fonts CSS (cached for offline use)
+  'https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600&family=Space+Mono:wght@400;500&family=Roboto+Mono:wght@400&display=swap'
 ];
 
 // Install event - cache static assets
@@ -39,13 +42,19 @@ self.addEventListener('fetch', event => {
   const { request } = event;
   const url = new URL(request.url);
 
-  // Cache-first for static assets
-  if (ASSETS_TO_CACHE.includes(request.url) ||
-      request.url.startsWith(self.location.origin + '/css/') ||
-      request.url.startsWith(self.location.origin + '/js/') ||
-      request.url.endsWith('.html') ||
-      request.url.endsWith('.json') &&
-      !request.url.includes('/api/')) {
+  // Cache-first for assets in our precache list
+  if (ASSETS_TO_CACHE.includes(request.url)) {
+    event.respondWith(caches.match(request).then(cached => cached || fetch(request)));
+    return;
+  }
+
+  // Cache-first for static assets under our origin (CSS, JS, HTML, JSON)
+  if (
+    request.url.startsWith(self.location.origin + '/css/') ||
+    request.url.startsWith(self.location.origin + '/js/') ||
+    request.url.endsWith('.html') ||
+    (request.url.endsWith('.json') && !request.url.includes('/api/'))
+  ) {
     event.respondWith(
       caches.match(request).then(cached => cached || fetch(request))
     );
