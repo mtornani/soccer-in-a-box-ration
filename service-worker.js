@@ -1,5 +1,5 @@
 // Service Worker for SoccerInABox PWA
-const CACHE_STATIC = 'static-v2';
+const CACHE_STATIC = 'static-v3';
 const CACHE_DATA = 'data-v2';
 const ASSETS_TO_CACHE = [
   '/',
@@ -12,6 +12,13 @@ const ASSETS_TO_CACHE = [
   '/manifest.json',
   '/assets/ration_test.json',
   '/assets/data/exercises.json',
+  '/assets/icons/icon-32.png',
+  '/assets/icons/icon-48.png',
+  '/assets/icons/icon-96.png',
+  '/assets/icons/icon-144.png',
+  '/assets/icons/icon-192.png',
+  '/assets/icons/icon-512.png',
+  '/assets/icons/apple-touch-icon.png',
   // Google Fonts CSS (cached for offline use)
   'https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600&family=Space+Mono:wght@400;500&family=Roboto+Mono:wght@400&display=swap'
 ];
