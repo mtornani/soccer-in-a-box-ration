@@ -46,5 +46,53 @@
     "equipment": ["ball", "wall"],
     "instructions": "Stand 2 meters from a wall. Throw the ball against the wall and attempt to head it back at a specific point on the wall. Repeat.",
     "source": "Public domain coaching manual"
+  },
+  {
+    "id": "ex005",
+    "title": "Keepie Uppie (Juggling)",
+    "description": "Solo ball juggling using feet, thighs and other body parts to keep the ball off the ground, building touch and coordination.",
+    "ageMin": 6,
+    "ageMax": 45,
+    "category": "technical",
+    "participantsMin": 1,
+    "equipment": ["ball"],
+    "instructions": "Drop the ball and use your feet, thighs, chest, shoulders or head to keep it off the ground, alternating body parts. Count consecutive touches without letting the ball hit the ground and try to beat your own record.",
+    "source": "Wikipedia - Keepie uppie"
+  },
+  {
+    "id": "ex006",
+    "title": "Jumping Jacks",
+    "description": "A full-body bodyweight movement combining a jump with arm and leg extension, used as a warm-up or conditioning drill.",
+    "ageMin": 6,
+    "ageMax": 45,
+    "category": "athletic",
+    "participantsMin": 1,
+    "equipment": [],
+    "instructions": "Start standing with feet together and arms at your sides. Jump while spreading your legs shoulder-width apart and raising your arms overhead. Jump again to return to the starting position with feet together and arms lowered. Repeat rhythmically for the desired number of repetitions or time.",
+    "source": "Wikipedia - Jumping jack"
+  },
+  {
+    "id": "ex007",
+    "title": "Rondo (Possession Circle)",
+    "description": "A possession passing game where a group of players keeps the ball away from one or more defenders in the middle, developing quick passing and decision-making under pressure.",
+    "ageMin": 10,
+    "ageMax": 45,
+    "category": "tactical",
+    "participantsMin": 3,
+    "equipment": ["ball"],
+    "instructions": "Mark out a small open area. Possessing players position themselves around the edge while one or two defenders stand in the middle trying to intercept or touch the ball. Possessing players move the ball quickly with one or two touches; if a defender wins the ball, swap them with the player who lost it.",
+    "source": "Wikipedia - Rondo (game)"
+  },
+  {
+    "id": "ex008",
+    "title": "Box Breathing",
+    "description": "A structured breathing technique using equal counts for inhale, hold, exhale and hold, used to reduce pre-match anxiety and regain focus.",
+    "ageMin": 8,
+    "ageMax": 45,
+    "category": "psychological",
+    "participantsMin": 1,
+    "equipment": [],
+    "instructions": "Sit or stand comfortably and exhale fully. Inhale slowly through your nose for a count of 4. Hold your breath for a count of 4. Exhale slowly for a count of 4. Hold your breath again for a count of 4. Repeat the cycle for 3-4 rounds.",
+    "source": "Cleveland Clinic - Box Breathing"
   }
 ]
