@@ -1,7 +1,34 @@
-import { Preferences } from '@capacitor/preferences';
+/**
+ * Preferences is a drop-in, browser-only replacement for
+ * @capacitor/preferences (same get/set/keys/remove shape).
+ *
+ * This app is served as plain static files with no bundler, so a bare
+ * module specifier like "@capacitor/preferences" cannot be resolved by
+ * the browser and throws a fatal module-loading error, which silently
+ * prevents app.js (and every button handler in it) from ever running.
+ * Backing this with localStorage keeps offline persistence working in
+ * any browser/PWA context without requiring a build step. If this app
+ * is later wrapped and shipped through a real Capacitor native build
+ * (with a bundler), swap this for the actual @capacitor/preferences
+ * import at that point.
+ */
+const Preferences = {
+  async set({ key, value }) {
+    localStorage.setItem(key, value);
+  },
+  async get({ key }) {
+    return { value: localStorage.getItem(key) };
+  },
+  async keys() {
+    return { keys: Object.keys(localStorage) };
+  },
+  async remove({ key }) {
+    localStorage.removeItem(key);
+  }
+};
 
 /**
- * StorageService provides a wrapper around @capacitor/preferences
+ * StorageService provides a wrapper around Preferences
  * to handle offline-first persistence of session data and logs.
  */
 export const StorageService = {
