@@ -1,20 +1,25 @@
 // Service Worker for SoccerInABox PWA
-const CACHE_STATIC = 'static-v2';
-const CACHE_DATA = 'data-v2';
+const CACHE_STATIC = 'static-v3';
+const CACHE_DATA = 'data-v3';
+// Relative to the SW scope, so the app also works from a sub-path.
 const ASSETS_TO_CACHE = [
-  '/',
-  '/index.html',
-  '/css/style.css',
-  '/js/app.js',
-  '/js/logistics.js',
-  '/js/field.js',
-  '/js/storage.js',
-  '/manifest.json',
-  '/assets/ration_test.json',
-  '/assets/data/exercises.json',
-  // Google Fonts CSS (cached for offline use)
-  'https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600&family=Space+Mono:wght@400;500&family=Roboto+Mono:wght@400&display=swap'
-];
+  './',
+  './index.html',
+  './css/style.css',
+  './js/app.js',
+  './js/logistics.js',
+  './js/field.js',
+  './js/storage.js',
+  './manifest.json',
+  './assets/icon.svg',
+  './assets/rations/r01.json',
+  './assets/rations/r02.json',
+  './assets/data/exercises.json',
+  './assets/fonts/stencil-800.woff2',
+  './assets/fonts/archivo-400.woff2',
+  './assets/fonts/archivo-600.woff2',
+  './assets/fonts/archivo-800.woff2'
+].map(path => new URL(path, self.registration.scope).href);
 
 // Install event - cache static assets
 self.addEventListener('install', event => {

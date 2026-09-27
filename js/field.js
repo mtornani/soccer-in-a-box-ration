@@ -8,15 +8,16 @@ export const FieldManager = {
   currentRation: null,
   phaseIndex: 0,
   timerInterval: null,
+  results: [],
 
   /**
    * Initializes a field session for a specific ration.
    * @param {object} ration - The validated ration data.
    */
   async initSession(ration) {
-    console.log('FieldManager: Initializing session for ration:', ration.title);
     this.currentRation = ration;
     this.phaseIndex = 0;
+    this.results = [];
     this.renderPhase();
   },
 
@@ -33,58 +34,27 @@ export const FieldManager = {
     }
 
     const phase = ration.phases[this.phaseIndex];
-    content.innerHTML = '';
+    document.getElementById('phase-count').textContent =
+      `Razione ${ration.code}, fase ${this.phaseIndex + 1} di ${ration.phases.length}`;
 
-    // Phase Title
-    const title = document.createElement('h2');
-    title.innerText = `PHASE ${this.phaseIndex + 1}: ${phase.title}`;
-    content.appendChild(title);
+    content.innerHTML = `
+      <h2 class="phase-title">${phase.title}</h2>
+      <div class="tactical-map">${phase.map || ''}</div>
+      <p class="phase-task">${phase.task || ''}</p>
+      ${phase.target ? `<p class="phase-target"><strong>Obiettivo</strong> ${phase.target}</p>` : ''}
+      <ul class="phase-points">
+        ${phase.coachingPoints.map(point => `<li>${point}</li>`).join('')}
+      </ul>
+      ${phase.metrics?.length ? `<p class="phase-metrics"><strong>Da misurare</strong> ${phase.metrics.join(', ')}</p>` : ''}
+      <div class="phase-actions">
+        <button class="btn-secondary" data-result="FAIL">Non riuscita</button>
+        <button class="btn-primary" data-result="SUCCESS">Riuscita</button>
+      </div>
+    `;
+    content.querySelectorAll('[data-result]').forEach(btn =>
+      btn.addEventListener('click', () => this.nextPhase(btn.dataset.result)));
 
-    // Tactical Map (High-contrast SVG)
-    const mapDiv = document.createElement('div');
-    mapDiv.className = 'tactical-map';
-    mapDiv.innerHTML = phase.map || '<div style="border: 1px solid #FFFF00; height: 100px; text-align: center; line-height: 100px;">[TACTICAL MAP UNAVAILABLE]</div>';
-    content.appendChild(mapDiv);
-
-    // Coaching Points (PDC list)
-    const cpList = document.createElement('ul');
-    cpList.style.listStyle = 'none';
-    cpList.style.padding = '0';
-    phase.coachingPoints.forEach(point => {
-      const li = document.createElement('li');
-      li.innerText = `> ${point}`;
-      li.style.marginBottom = '5px';
-      cpList.appendChild(li);
-    });
-    content.appendChild(cpList);
-
-    // Binary Log Buttons
-    const logContainer = document.createElement('div');
-    logContainer.style.display = 'flex';
-    logContainer.style.gap = '10px';
-    logContainer.style.marginTop = '20px';
-
-    const btnFail = document.createElement('button');
-    btnFail.className = 'btn-brutal';
-    btnFail.innerText = 'FAIL';
-    btnFail.onclick = () => this.nextPhase('FAIL');
-
-    const btnSuccess = document.createElement('button');
-    btnSuccess.className = 'btn-brutal';
-    btnSuccess.innerText = 'SUCCESS';
-    btnSuccess.onclick = () => this.nextPhase('SUCCESS');
-
-    logContainer.appendChild(btnFail);
-    logContainer.appendChild(btnSuccess);
-    content.appendChild(logContainer);
-
-    // Timer
-    if (phase.duration) {
-      this.startTimer(phase.duration);
-    } else {
-      this.stopTimer();
-      document.getElementById('phase-timer').innerText = 'NO TIMER';
-    }
+    this.startTimer(phase.duration);
   },
 
   /**
@@ -93,19 +63,22 @@ export const FieldManager = {
    */
   startTimer(durationMinutes) {
     this.stopTimer();
-    let seconds = durationMinutes * 60;
     const timerEl = document.getElementById('phase-timer');
+    let seconds = durationMinutes * 60;
+    const paint = () => {
+      const mins = Math.floor(seconds / 60);
+      const secs = seconds % 60;
+      timerEl.textContent = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+    };
+    paint();
 
     this.timerInterval = setInterval(() => {
       seconds--;
-      const mins = Math.floor(seconds / 60);
-      const secs = seconds % 60;
-      timerEl.innerText = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
-
+      paint();
       if (seconds <= 0) {
         this.stopTimer();
-        timerEl.innerText = 'TIME EXPIRED';
-        timerEl.style.color = 'var(--danger-color)';
+        timerEl.textContent = 'Tempo';
+        timerEl.classList.add('is-expired');
       }
     }, 1000);
   },
@@ -115,7 +88,7 @@ export const FieldManager = {
       clearInterval(this.timerInterval);
       this.timerInterval = null;
     }
-    document.getElementById('phase-timer').style.color = 'var(--accent-color)';
+    document.getElementById('phase-timer').classList.remove('is-expired');
   },
 
   /**
@@ -126,8 +99,8 @@ export const FieldManager = {
     const ration = this.currentRation;
     if (!ration) return;
 
-    // Log the result
     if (result) {
+      this.results.push(result);
       await StorageService.saveLog(ration.id, {
         phaseIndex: this.phaseIndex,
         phaseTitle: ration.phases[this.phaseIndex].title,
@@ -141,9 +114,13 @@ export const FieldManager = {
   },
 
   showOperationComplete() {
-    const content = document.getElementById('phase-content');
-    content.innerHTML = '<h2>OPERATION COMPLETE</h2><p>All phases executed. Return to logistics for debrief.</p>';
     this.stopTimer();
-    document.getElementById('phase-timer').innerText = '00:00';
+    const ok = this.results.filter(r => r === 'SUCCESS').length;
+    document.getElementById('phase-count').textContent = `Razione ${this.currentRation.code} completata`;
+    document.getElementById('phase-timer').textContent = `${ok}/${this.results.length}`;
+    document.getElementById('phase-content').innerHTML = `
+      <h2 class="phase-title">Sessione chiusa</h2>
+      <p class="phase-task">Fasi riuscite: ${ok} su ${this.results.length}. L'esito è salvato sul telefono.</p>
+    `;
   }
 };

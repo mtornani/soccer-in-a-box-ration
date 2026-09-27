@@ -1,0 +1,92 @@
+{
+  "id": "r02",
+  "code": "02",
+  "title": "Squadra, campo qualsiasi",
+  "summary": "Una seduta completa per una squadra di dilettanti o giovani, senza staff.",
+  "players": "10–16 giocatori",
+  "durationMin": 75,
+  "place": "Uno spazio di almeno 40 × 30 metri",
+  "equipment": [
+    "6 palloni",
+    "12 segnali",
+    "casacche di 2 colori"
+  ],
+  "phases": [
+    {
+      "title": "Attivazione a coppie",
+      "duration": 12,
+      "task": "Coppie a 10 metri: passaggio e movimento incontro, poi uno-due, poi passaggio lungo. Tra una serie e l'altra, mobilità dinamica.",
+      "coachingPoints": [
+        "Ricevi già orientato verso il compagno",
+        "Chiama il pallone",
+        "Un tocco quando possibile"
+      ],
+      "metrics": [
+        "distanza",
+        "tocchi di palla"
+      ],
+      "map": "<svg viewBox='0 0 200 120' xmlns='http://www.w3.org/2000/svg'><rect class='f' x='4' y='4' width='192' height='112'/><circle class='p' cx='50' cy='40' r='5'/><circle class='p' cx='150' cy='40' r='5'/><circle class='p' cx='50' cy='80' r='5'/><circle class='p' cx='150' cy='80' r='5'/><line class='k' x1='58' y1='40' x2='142' y2='40'/><line class='k' x1='58' y1='80' x2='142' y2='80'/></svg>"
+    },
+    {
+      "title": "Rondo 4 contro 2",
+      "duration": 12,
+      "task": "Quadrato 10 × 10. Quattro esterni, due dentro. Chi sbaglia entra. Blocchi da 90 secondi.",
+      "coachingPoints": [
+        "Sempre due linee di passaggio aperte",
+        "Passaggio sul piede lontano dal difensore",
+        "I due dentro pressano insieme, non uno alla volta"
+      ],
+      "target": "10 passaggi di fila = 1 punto",
+      "metrics": [
+        "accelerazioni",
+        "cambi di direzione"
+      ],
+      "map": "<svg viewBox='0 0 200 120' xmlns='http://www.w3.org/2000/svg'><rect class='f' x='4' y='4' width='192' height='112'/><rect class='r' x='60' y='20' width='80' height='80'/><circle class='p' cx='100' cy='20' r='5'/><circle class='p' cx='60' cy='60' r='5'/><circle class='p' cx='140' cy='60' r='5'/><circle class='p' cx='100' cy='100' r='5'/><circle class='o' cx='90' cy='55' r='5'/><circle class='o' cx='112' cy='68' r='5'/><circle class='b' cx='100' cy='27' r='2.5'/></svg>"
+    },
+    {
+      "title": "Possesso 5 contro 5 più 2 jolly",
+      "duration": 16,
+      "task": "Campo 30 × 25. Due squadre da 5, due jolly che giocano con chi ha palla. 4 blocchi da 3 minuti, 1 di recupero.",
+      "coachingPoints": [
+        "Allarga il campo quando abbiamo palla",
+        "Stringi quando la perdiamo",
+        "Il jolly è un'uscita, non un rifugio"
+      ],
+      "target": "8 passaggi consecutivi = 1 punto",
+      "metrics": [
+        "distanza ad alta intensità",
+        "sprint"
+      ],
+      "map": "<svg viewBox='0 0 200 120' xmlns='http://www.w3.org/2000/svg'><rect class='f' x='4' y='4' width='192' height='112'/><rect class='r' x='30' y='12' width='140' height='96'/><circle class='p' cx='50' cy='30' r='5'/><circle class='p' cx='90' cy='50' r='5'/><circle class='p' cx='130' cy='30' r='5'/><circle class='p' cx='70' cy='90' r='5'/><circle class='p' cx='150' cy='80' r='5'/><circle class='o' cx='60' cy='60' r='5'/><circle class='o' cx='100' cy='30' r='5'/><circle class='o' cx='120' cy='70' r='5'/><circle class='o' cx='80' cy='40' r='5'/><circle class='o' cx='140' cy='50' r='5'/><circle class='j' cx='100' cy='12' r='5'/><circle class='j' cx='100' cy='108' r='5'/></svg>"
+    },
+    {
+      "title": "Partita a tema: transizione",
+      "duration": 25,
+      "task": "Partita 7 contro 7 su campo ridotto con porte. Chi recupera palla ha 8 secondi per tirare: il gol vale doppio.",
+      "coachingPoints": [
+        "Al recupero, primo passaggio in avanti se possibile",
+        "Chi perde palla: 5 secondi di pressione immediata",
+        "Occupare le corsie laterali in ripartenza"
+      ],
+      "metrics": [
+        "sprint",
+        "velocità massima",
+        "distanza totale"
+      ],
+      "map": "<svg viewBox='0 0 200 120' xmlns='http://www.w3.org/2000/svg'><rect class='f' x='4' y='4' width='192' height='112'/><line class='r' x1='100' y1='4' x2='100' y2='116'/><rect class='g' x='4' y='44' width='6' height='32'/><rect class='g' x='190' y='44' width='6' height='32'/><circle class='p' cx='40' cy='40' r='5'/><circle class='p' cx='60' cy='80' r='5'/><circle class='p' cx='90' cy='60' r='5'/><circle class='o' cx='120' cy='40' r='5'/><circle class='o' cx='140' cy='80' r='5'/><circle class='o' cx='160' cy='60' r='5'/><circle class='b' cx='97' cy='60' r='2.5'/><path class='k' d='M95 60 L150 60'/></svg>"
+    },
+    {
+      "title": "Defaticamento e confronto",
+      "duration": 10,
+      "task": "Corsa lenta e allungamento in cerchio. Ogni giocatore dice una cosa riuscita e una da migliorare.",
+      "coachingPoints": [
+        "Tutti parlano, a turno",
+        "Una frase a testa, concreta"
+      ],
+      "metrics": [
+        "frequenza cardiaca di recupero"
+      ],
+      "map": "<svg viewBox='0 0 200 120' xmlns='http://www.w3.org/2000/svg'><rect class='f' x='4' y='4' width='192' height='112'/><circle class='p' cx='135' cy='60' r='5'/><circle class='p' cx='124' cy='84' r='5'/><circle class='p' cx='100' cy='94' r='5'/><circle class='p' cx='76' cy='84' r='5'/><circle class='p' cx='66' cy='60' r='5'/><circle class='p' cx='76' cy='36' r='5'/><circle class='p' cx='100' cy='26' r='5'/><circle class='p' cx='124' cy='36' r='5'/></svg>"
+    }
+  ]
+}

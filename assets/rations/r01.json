@@ -1,0 +1,91 @@
+{
+  "id": "r01",
+  "code": "01",
+  "title": "Da solo, ovunque",
+  "summary": "Un giocatore, un pallone, un muro. Tecnica e velocità senza allenatore.",
+  "players": "1 giocatore",
+  "durationMin": 40,
+  "place": "Un muro e 20 metri di terreno piano",
+  "equipment": [
+    "1 pallone",
+    "4 segnali (conetti, bottiglie o sassi)"
+  ],
+  "phases": [
+    {
+      "title": "Attivazione",
+      "duration": 6,
+      "task": "Corsa leggera avanti e indietro su 20 metri: skip, calciata, passo laterale, corsa all'indietro.",
+      "coachingPoints": [
+        "Appoggio sull'avampiede",
+        "Braccia che accompagnano la corsa",
+        "Alza il ritmo a ogni giro"
+      ],
+      "metrics": [
+        "distanza",
+        "frequenza cardiaca"
+      ],
+      "map": "<svg viewBox='0 0 200 120' xmlns='http://www.w3.org/2000/svg'><rect class='f' x='4' y='4' width='192' height='112'/><path class='c' d='M36 64L40 56L44 64Z'/><path class='c' d='M166 64L170 56L174 64Z'/><circle class='p' cx='40' cy='60' r='5'/><line class='r' x1='48' y1='60' x2='162' y2='60'/></svg>"
+    },
+    {
+      "title": "Muro: passa e controlla",
+      "duration": 10,
+      "task": "A 3 metri dal muro: passaggio di interno, controllo orientato verso un lato, nuovo passaggio. Cambia piede ogni 10.",
+      "coachingPoints": [
+        "Il controllo porta la palla lontano dai piedi, verso lo spazio",
+        "Guarda oltre la spalla prima di ricevere",
+        "Piede debole: metà delle ripetizioni"
+      ],
+      "target": "100 passaggi puliti, 50 per piede",
+      "metrics": [
+        "tocchi di palla"
+      ],
+      "map": "<svg viewBox='0 0 200 120' xmlns='http://www.w3.org/2000/svg'><rect class='f' x='4' y='4' width='192' height='112'/><rect class='w' x='4' y='4' width='6' height='112'/><circle class='p' cx='60' cy='60' r='5'/><circle class='b' cx='52' cy='60' r='2.5'/><line class='k' x1='52' y1='60' x2='12' y2='50'/><line class='k' x1='12' y1='50' x2='52' y2='74'/><path class='c' d='M76 44L80 36L84 44Z'/><path class='c' d='M76 84L80 76L84 84Z'/></svg>"
+    },
+    {
+      "title": "Slalom e cambio di senso",
+      "duration": 8,
+      "task": "Quattro segnali in fila a 1,5 metri. Slalom stretto, all'ultimo segnale cambio di senso e ritorno in velocità.",
+      "coachingPoints": [
+        "Tocchi piccoli, palla sempre a un passo",
+        "Testa alta tra un segnale e l'altro",
+        "Esplodi dopo il cambio di senso"
+      ],
+      "target": "8 serie da 30 secondi, 30 secondi di recupero",
+      "metrics": [
+        "accelerazioni",
+        "cambi di direzione"
+      ],
+      "map": "<svg viewBox='0 0 200 120' xmlns='http://www.w3.org/2000/svg'><rect class='f' x='4' y='4' width='192' height='112'/><path class='c' d='M56 64L60 56L64 64Z'/><path class='c' d='M86 64L90 56L94 64Z'/><path class='c' d='M116 64L120 56L124 64Z'/><path class='c' d='M146 64L150 56L154 64Z'/><circle class='p' cx='30' cy='60' r='5'/><circle class='b' cx='38' cy='62' r='2.5'/><path class='r' d='M40 60 Q60 40 75 60 T105 60 T135 60 T165 60'/></svg>"
+    },
+    {
+      "title": "Sprint ripetuti",
+      "duration": 10,
+      "task": "8 sprint da 20 metri alla massima velocità. Rientro camminando: circa 40 secondi di recupero.",
+      "coachingPoints": [
+        "Partenza bassa, primi tre passi corti e potenti",
+        "Corri oltre il segnale, non fermarti sulla linea",
+        "Se la velocità cala molto, fermati: qualità prima della quantità"
+      ],
+      "target": "8 sprint alla massima velocità",
+      "metrics": [
+        "velocità massima",
+        "accelerazioni",
+        "distanza ad alta intensità"
+      ],
+      "map": "<svg viewBox='0 0 200 120' xmlns='http://www.w3.org/2000/svg'><rect class='f' x='4' y='4' width='192' height='112'/><path class='c' d='M26 64L30 56L34 64Z'/><path class='c' d='M166 64L170 56L174 64Z'/><circle class='p' cx='30' cy='60' r='5'/><line class='r' x1='40' y1='60' x2='165' y2='60'/><path class='r' d='M160 54L170 60L160 66'/></svg>"
+    },
+    {
+      "title": "Defaticamento",
+      "duration": 6,
+      "task": "Corsa lenta, poi allungamento di polpacci, flessori, quadricipiti e adduttori: 30 secondi per posizione.",
+      "coachingPoints": [
+        "Respira lento, espira nell'allungamento",
+        "Nessun dolore, solo tensione"
+      ],
+      "metrics": [
+        "frequenza cardiaca di recupero"
+      ],
+      "map": "<svg viewBox='0 0 200 120' xmlns='http://www.w3.org/2000/svg'><rect class='f' x='4' y='4' width='192' height='112'/><circle class='p' cx='100' cy='60' r='5'/><circle class='r' cx='100' cy='60' r='30'/></svg>"
+    }
+  ]
+}

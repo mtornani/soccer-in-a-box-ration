@@ -1,5 +1,7 @@
 import { StorageService } from './storage.js';
 
+const BUNDLED_RATIONS = ['r01', 'r02'];
+
 /**
  * LogisticsManager handles the fetching and validation of "Rations" (mission data).
  * Ensures that only valid rations are stored locally for offline use.
@@ -35,23 +37,20 @@ export const LogisticsManager = {
   },
 
   /**
-   * Loads the test ration from the local assets folder.
-   * Used for testing and development.
+   * Copies the rations bundled with the app into local storage.
+   * Runs at every start so content updates reach the device; if the fetch
+   * fails (offline, no cache) the stored copies stay untouched.
    */
-  async loadTestRation() {
-    try {
-      const response = await fetch('./assets/ration_test.json');
-      if (!response.ok) {
-        throw new Error(`Failed to load test ration: ${response.statusText}`);
+  async loadBundledRations() {
+    for (const id of BUNDLED_RATIONS) {
+      try {
+        const response = await fetch(`./assets/rations/${id}.json`);
+        if (!response.ok) throw new Error(response.statusText);
+        const data = await response.json();
+        await StorageService.saveRation(data.id || id, data);
+      } catch (error) {
+        console.warn(`Bundled ration ${id} not refreshed:`, error.message);
       }
-      const data = await response.json();
-      const rationId = data.id || 'test-001';
-      await StorageService.saveRation(rationId, data);
-      console.log(`Test ration ${rationId} loaded successfully.`);
-      return data;
-    } catch (error) {
-      console.error('Test Ration Load Error:', error.message);
-      throw error;
     }
   },
 

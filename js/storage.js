@@ -1,4 +1,13 @@
-import { Preferences } from '@capacitor/preferences';
+/**
+ * Key-value backend. Uses the native Capacitor Preferences plugin when the app
+ * runs inside the Capacitor shell, localStorage in a plain browser/PWA.
+ * (A bare `import from '@capacitor/preferences'` cannot resolve without a bundler.)
+ */
+const Preferences = window.Capacitor?.Plugins?.Preferences ?? {
+  async set({ key, value }) { localStorage.setItem(key, value); },
+  async get({ key }) { return { value: localStorage.getItem(key) }; },
+  async keys() { return { keys: Object.keys(localStorage) }; }
+};
 
 /**
  * StorageService provides a wrapper around @capacitor/preferences

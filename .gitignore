@@ -1,1 +1,4 @@
 .claude/worktrees/
+.playwright-mcp/
+node_modules/
+video/out/

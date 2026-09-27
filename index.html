@@ -1,82 +1,72 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SoccerInABox</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#4A5431">
+    <title>Soccer in a Box</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="manifest" href="manifest.json">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600&family=Space+Mono:wght@400;500&family=Roboto+Mono:wght@400&display=swap" rel="stylesheet">
+    <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
 </head>
-<body class="tactical-dark">
-    <div class="container">
-        <div id="logistics-mode" class="mode-container">
-            <h1>LOGISTICS MODE</h1>
-            <p>RATION PACK: SOCCER-RATION-01</p>
-            <div id="ration-list">
-                <!-- Ration list content will be injected here -->
-                <div class="ration-item">
-                    <span>EQUIPMENT: CHECKED</span>
-                    <span>[OK]</span>
-                </div>
-            </div>
-            <button class="btn-brutal" id="enter-field-btn">ENTER FIELD MODE</button>
-            <button class="btn-brutal" id="show-exercises-btn">EXERCISES</button>
-        </div>
+<body>
+    <header class="brand">
+        <span class="brand-name">Soccer in a Box</span>
+        <span class="brand-state" id="net-state">Offline pronto</span>
+    </header>
 
-        <div id="field-mode" class="mode-container hidden">
-            <h1>FIELD MODE: OPERATIONAL</h1>
-            <div id="phase-timer">00:00</div>
-            <div id="phase-content">
-                <!-- Phase content will be injected here -->
-                READY FOR DEPLOYMENT...
-            </div>
-            <button class="btn-brutal" id="next-phase-btn">NEXT PHASE</button>
-            <button class="btn-brutal" id="complete-op-btn">COMPLETE OPERATION</button>
-        </div>
+    <main class="container">
+        <section id="logistics-mode" class="mode-container">
+            <h1 class="screen-title">Razioni</h1>
+            <p class="screen-lead">Sessioni complete, già sul telefono. Funzionano senza rete.</p>
+            <div id="ration-list"></div>
+        </section>
 
-        <!-- Exercises Section -->
+        <section id="field-mode" class="mode-container hidden">
+            <div class="field-head">
+                <span id="phase-count"></span>
+                <button class="btn-text" id="complete-op-btn">Chiudi sessione</button>
+            </div>
+            <div id="phase-timer" aria-live="polite">00:00</div>
+            <div id="phase-content"></div>
+        </section>
+
         <section id="exercises-section" class="mode-container hidden">
-            <h1>TRAINING EXERCISES</h1>
+            <h1 class="screen-title">Esercizi</h1>
             <div id="exercise-filters" class="filter-bar">
                 <div class="filter-group">
-                    <label for="category-filter">Category</label>
+                    <label for="category-filter">Area</label>
                     <select id="category-filter">
-                        <option value="all">All</option>
-                        <option value="technical">Technical</option>
-                        <option value="athletic">Athletic</option>
-                        <option value="tactical">Tactical</option>
-                        <option value="psychological">Psychological</option>
+                        <option value="all">Tutte</option>
+                        <option value="technical">Tecnica</option>
+                        <option value="athletic">Atletica</option>
+                        <option value="tactical">Tattica</option>
+                        <option value="psychological">Mentale</option>
                     </select>
                 </div>
                 <div class="filter-group">
-                    <label for="age-filter">Age</label>
+                    <label for="age-filter">Età: <span id="age-value">45</span></label>
                     <input type="range" id="age-filter" min="6" max="45" value="45">
-                    <span id="age-value">45</span>
                 </div>
                 <div class="filter-group">
-                    <label for="participants-filter">Participants</label>
-                    <input type="number" id="participants-filter" min="1" max="20" value="1">
+                    <label for="participants-filter">Giocatori disponibili</label>
+                    <input type="number" id="participants-filter" min="1" max="30" value="20">
                 </div>
             </div>
-            <div id="exercises-grid" class="card-grid">
-                <!-- Exercise cards will be injected here -->
-            </div>
+            <div id="exercises-grid" class="card-grid"></div>
         </section>
-    </div>
-    <!-- Heartbeat footer -->
-    <footer id="heartbeat-footer">
-        <svg viewBox="0 0 100 20" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0,10 C10,0 20,20 30,10 T50,10 T70,10 T90,0" fill="none" stroke="#FFFF00" stroke-width="2"/>
-        </svg>
-    </footer>
+    </main>
+
+    <nav class="tabbar">
+        <button class="tab is-active" id="show-rations-btn">Razioni</button>
+        <button class="tab" id="show-exercises-btn">Esercizi</button>
+    </nav>
+
     <script type="module" src="js/app.js"></script>
     <script>
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
           navigator.serviceWorker.register('service-worker.js')
-            .then(reg => console.log('SW registered', reg))
             .catch(err => console.warn('SW registration failed', err));
         });
       }

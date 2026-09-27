@@ -1,50 +1,291 @@
 [
   {
     "id": "ex001",
-    "title": "Wall Pass",
-    "description": "A simple one-touch pass against a wall to improve passing accuracy and first touch.",
+    "title": "Muro: passa e controlla",
+    "description": "Passaggio di interno contro il muro da 3 metri, controllo orientato, nuovo passaggio.",
     "ageMin": 6,
     "ageMax": 45,
     "category": "technical",
     "participantsMin": 1,
-    "equipment": ["ball", "wall"],
-    "instructions": "Stand 2-3 meters from a wall. Pass the ball against the wall using the inside of your foot, control the rebound, and repeat. Alternate feet.",
-    "source": "Public domain coaching manual"
+    "equipment": [
+      "pallone",
+      "muro"
+    ],
+    "instructions": "Alterna i piedi ogni 10 passaggi. Il controllo deve portare la palla verso uno spazio libero, mai sotto i piedi.",
+    "source": "Contenuto originale Soccer in a Box"
   },
   {
     "id": "ex002",
-    "title": "Cone Dribbling",
-    "description": "Dribble through a line of cones using both feet to improve close control.",
+    "title": "Slalom e cambio di senso",
+    "description": "Guida palla stretta tra quattro segnali, cambio di senso e ritorno in velocità.",
     "ageMin": 6,
     "ageMax": 45,
     "category": "technical",
     "participantsMin": 1,
-    "equipment": ["ball", "cones (5)"],
-    "instructions": "Place cones in a straight line 1 meter apart. Dribble through the cones using quick touches, alternating feet. Return to start and repeat.",
-    "source": "Public domain coaching manual"
+    "equipment": [
+      "pallone",
+      "4 segnali"
+    ],
+    "instructions": "Segnali in fila a 1,5 metri. Usa interno ed esterno dello stesso piede. 8 serie da 30 secondi.",
+    "source": "Contenuto originale Soccer in a Box"
   },
   {
     "id": "ex003",
-    "title": "Shuttle Runs",
-    "description": "Sprint between two points to improve acceleration and anaerobic fitness.",
-    "ageMin": 12,
+    "title": "Palleggio a obiettivi",
+    "description": "Palleggio libero con obiettivi crescenti: 10, 20, 50 tocchi senza far cadere la palla.",
+    "ageMin": 6,
     "ageMax": 45,
-    "category": "athletic",
+    "category": "technical",
     "participantsMin": 1,
-    "equipment": ["cones (2)"],
-    "instructions": "Place two cones 20 meters apart. Sprint from one cone to the other, touch the ground, and sprint back. Repeat for desired repetitions.",
-    "source": "Public domain fitness guide"
+    "equipment": [
+      "pallone"
+    ],
+    "instructions": "Solo piede destro, solo sinistro, alternati, poi coscia e testa. Annota il record.",
+    "source": "Contenuto originale Soccer in a Box"
   },
   {
     "id": "ex004",
-    "title": "Heading Practice",
-    "description": "Throw the ball against a wall and head it back to improve heading accuracy and timing.",
+    "title": "Colpo di testa al muro",
+    "description": "Lancia la palla contro il muro e rimandala di testa verso un punto preciso.",
     "ageMin": 14,
     "ageMax": 45,
     "category": "technical",
     "participantsMin": 1,
-    "equipment": ["ball", "wall"],
-    "instructions": "Stand 2 meters from a wall. Throw the ball against the wall and attempt to head it back at a specific point on the wall. Repeat.",
-    "source": "Public domain coaching manual"
+    "equipment": [
+      "pallone",
+      "muro"
+    ],
+    "instructions": "A 2 metri dal muro. Colpisci con la fronte, occhi aperti, collo fermo. 3 serie da 10.",
+    "source": "Contenuto originale Soccer in a Box"
+  },
+  {
+    "id": "ex005",
+    "title": "Tiro sul punto",
+    "description": "Disegna due riquadri sul muro e colpiscili da 11 metri, di piatto e di collo.",
+    "ageMin": 8,
+    "ageMax": 45,
+    "category": "technical",
+    "participantsMin": 1,
+    "equipment": [
+      "pallone",
+      "muro",
+      "gesso o nastro"
+    ],
+    "instructions": "10 tiri per piede e per tipo di colpo. Conta i centri.",
+    "source": "Contenuto originale Soccer in a Box"
+  },
+  {
+    "id": "ex006",
+    "title": "Primo controllo aereo",
+    "description": "Un compagno lancia con le mani, l'altro controlla di piede, coscia o petto e restituisce a terra.",
+    "ageMin": 10,
+    "ageMax": 45,
+    "category": "technical",
+    "participantsMin": 2,
+    "equipment": [
+      "pallone"
+    ],
+    "instructions": "Lanci a varie altezze. Obiettivo: palla ferma entro un passo in un solo tocco.",
+    "source": "Contenuto originale Soccer in a Box"
+  },
+  {
+    "id": "ex007",
+    "title": "Sprint da 20 metri",
+    "description": "Sprint alla massima velocità su 20 metri, recupero camminando.",
+    "ageMin": 12,
+    "ageMax": 45,
+    "category": "athletic",
+    "participantsMin": 1,
+    "equipment": [
+      "2 segnali"
+    ],
+    "instructions": "8 ripetizioni, circa 40 secondi di recupero. Interrompi se la velocità cala molto.",
+    "source": "Contenuto originale Soccer in a Box"
+  },
+  {
+    "id": "ex008",
+    "title": "Navetta 5-10-5",
+    "description": "Corsa con cambi di direzione tra tre segnali a 5 metri l'uno dall'altro.",
+    "ageMin": 12,
+    "ageMax": 45,
+    "category": "athletic",
+    "participantsMin": 1,
+    "equipment": [
+      "3 segnali"
+    ],
+    "instructions": "Parti dal centro, tocca il segnale a destra, poi quello a sinistra, torna al centro. 6 ripetizioni.",
+    "source": "Contenuto originale Soccer in a Box"
+  },
+  {
+    "id": "ex009",
+    "title": "Balzi e atterraggi",
+    "description": "Salti a piedi pari e monopodalici con atterraggio controllato.",
+    "ageMin": 12,
+    "ageMax": 45,
+    "category": "athletic",
+    "participantsMin": 1,
+    "equipment": [],
+    "instructions": "3 serie da 6 salti per tipo. Atterra morbido, ginocchia in linea con le punte. Qualità, non quantità.",
+    "source": "Contenuto originale Soccer in a Box"
+  },
+  {
+    "id": "ex010",
+    "title": "Circuito a corpo libero",
+    "description": "Squat, affondi, plank, ponte glutei: forza di base senza attrezzi.",
+    "ageMin": 12,
+    "ageMax": 45,
+    "category": "athletic",
+    "participantsMin": 1,
+    "equipment": [],
+    "instructions": "40 secondi di lavoro, 20 di pausa, 3 giri. Adatto a qualsiasi spazio, anche al chiuso.",
+    "source": "Contenuto originale Soccer in a Box"
+  },
+  {
+    "id": "ex011",
+    "title": "Corsa intermittente 15-15",
+    "description": "15 secondi di corsa veloce, 15 secondi di corsa lenta.",
+    "ageMin": 14,
+    "ageMax": 45,
+    "category": "athletic",
+    "participantsMin": 1,
+    "equipment": [
+      "2 segnali"
+    ],
+    "instructions": "2 blocchi da 6 minuti. Ritmo costante per tutte le ripetizioni.",
+    "source": "Contenuto originale Soccer in a Box"
+  },
+  {
+    "id": "ex012",
+    "title": "Rondo 4 contro 2",
+    "description": "Quattro esterni mantengono il possesso contro due difensori in un quadrato 10 × 10.",
+    "ageMin": 8,
+    "ageMax": 45,
+    "category": "tactical",
+    "participantsMin": 6,
+    "equipment": [
+      "pallone",
+      "4 segnali"
+    ],
+    "instructions": "Chi sbaglia entra. Blocchi da 90 secondi. Sempre due linee di passaggio aperte.",
+    "source": "Contenuto originale Soccer in a Box"
+  },
+  {
+    "id": "ex013",
+    "title": "Possesso 5 contro 5 più 2 jolly",
+    "description": "Possesso in superiorità numerica con due jolly che giocano con chi ha palla.",
+    "ageMin": 10,
+    "ageMax": 45,
+    "category": "tactical",
+    "participantsMin": 12,
+    "equipment": [
+      "palloni",
+      "segnali",
+      "casacche"
+    ],
+    "instructions": "Campo 30 × 25. 8 passaggi consecutivi valgono un punto. Allarga il campo in possesso, stringi in non possesso.",
+    "source": "Contenuto originale Soccer in a Box"
+  },
+  {
+    "id": "ex014",
+    "title": "Partita a tema: transizione",
+    "description": "Partita su campo ridotto: chi recupera palla ha 8 secondi per tirare.",
+    "ageMin": 10,
+    "ageMax": 45,
+    "category": "tactical",
+    "participantsMin": 10,
+    "equipment": [
+      "palloni",
+      "porte",
+      "casacche"
+    ],
+    "instructions": "Gol in transizione vale doppio. Chi perde palla pressa subito per 5 secondi.",
+    "source": "Contenuto originale Soccer in a Box"
+  },
+  {
+    "id": "ex015",
+    "title": "Uscita dal basso 3 contro 2",
+    "description": "Portiere e due difensori costruiscono contro due attaccanti fino a una linea di meta.",
+    "ageMin": 12,
+    "ageMax": 45,
+    "category": "tactical",
+    "participantsMin": 6,
+    "equipment": [
+      "pallone",
+      "segnali",
+      "porta"
+    ],
+    "instructions": "Difensori larghi, portiere come terzo uomo. Se gli attaccanti recuperano, tirano in porta.",
+    "source": "Contenuto originale Soccer in a Box"
+  },
+  {
+    "id": "ex016",
+    "title": "Difesa a coppie 1 contro 1",
+    "description": "Duello in corridoio 10 × 20: l'attaccante prova a superare una linea, il difensore lo impedisce.",
+    "ageMin": 10,
+    "ageMax": 45,
+    "category": "tactical",
+    "participantsMin": 2,
+    "equipment": [
+      "pallone",
+      "4 segnali"
+    ],
+    "instructions": "Il difensore si posiziona di lato, non frontale, e porta l'avversario sul piede debole.",
+    "source": "Contenuto originale Soccer in a Box"
+  },
+  {
+    "id": "ex017",
+    "title": "Reazione all'errore",
+    "description": "Dopo ogni errore nell'esercizio al muro, una parola chiave e subito la ripetizione successiva.",
+    "ageMin": 10,
+    "ageMax": 45,
+    "category": "psychological",
+    "participantsMin": 1,
+    "equipment": [
+      "pallone",
+      "muro"
+    ],
+    "instructions": "Scegli una parola breve (per esempio \"prossima\"). Serve a staccare l'attenzione dall'errore in meno di 3 secondi.",
+    "source": "Contenuto originale Soccer in a Box"
+  },
+  {
+    "id": "ex018",
+    "title": "Obiettivo della seduta",
+    "description": "Prima di allenarti scrivi un solo obiettivo concreto, a fine seduta valuti da 1 a 5.",
+    "ageMin": 10,
+    "ageMax": 45,
+    "category": "psychological",
+    "participantsMin": 1,
+    "equipment": [
+      "carta e penna"
+    ],
+    "instructions": "Esempio: \"controllo orientato col sinistro\". Rileggi gli ultimi 5 obiettivi ogni settimana.",
+    "source": "Contenuto originale Soccer in a Box"
+  },
+  {
+    "id": "ex019",
+    "title": "Respirazione prima del rigore",
+    "description": "Routine di tre respiri lenti e un punto fisso prima di ogni tiro da fermo.",
+    "ageMin": 12,
+    "ageMax": 45,
+    "category": "psychological",
+    "participantsMin": 1,
+    "equipment": [
+      "pallone",
+      "porta o muro"
+    ],
+    "instructions": "Inspira 4 secondi, espira 6. Guarda l'angolo scelto, poi solo la palla. 10 rigori a seduta.",
+    "source": "Contenuto originale Soccer in a Box"
+  },
+  {
+    "id": "ex020",
+    "title": "Confronto di fine seduta",
+    "description": "In cerchio, ognuno dice una cosa riuscita e una da migliorare.",
+    "ageMin": 8,
+    "ageMax": 45,
+    "category": "psychological",
+    "participantsMin": 4,
+    "equipment": [],
+    "instructions": "Una frase a testa, concreta. L'allenatore parla per ultimo.",
+    "source": "Contenuto originale Soccer in a Box"
   }
 ]

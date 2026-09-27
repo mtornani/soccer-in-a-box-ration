@@ -2,6 +2,13 @@ import { LogisticsManager } from './logistics.js';
 import { FieldManager } from './field.js';
 import { StorageService, ExerciseStorage } from './storage.js';
 
+const CATEGORY_LABELS = {
+  technical: 'Tecnica',
+  athletic: 'Atletica',
+  tactical: 'Tattica',
+  psychological: 'Mentale'
+};
+
 /**
  * App coordinator for Soccer In A Box - Military Ration.
  * Manages high-level state transitions between Logistics and Field modes.
@@ -10,204 +17,156 @@ const App = {
   exercises: [], // array of exercise objects
 
   async init() {
-    console.log('App: Initializing Tactical Interface...');
     this.bindEvents();
-    this.setupLogisticsUI();
-    await this.loadExercises();
     this.bindExerciseEvents();
+    this.watchNetwork();
+    await LogisticsManager.loadBundledRations();
+    await this.setupLogisticsUI();
+    await this.loadExercises();
   },
 
   /**
-   * Load exercises from storage and sync if online.
+   * Load exercises. The bundled file (cached by the service worker) wins,
+   * so content updates reach devices; stored copy is the fallback.
    */
   async loadExercises() {
     try {
-      const stored = await ExerciseStorage.load();
-      if (stored.length === 0) {
-        // No cached data, try to fetch from bundled JSON
-        const bundled = await fetch('/assets/data/exercises.json')
-          .then(r => r.json())
-          .catch(() => null);
-        if (bundled) {
-          await ExerciseStorage.save(bundled);
-          this.exercises = bundled;
-          console.log('App: Loaded bundled exercises');
-        } else {
-          this.exercises = [];
-          console.warn('App: No exercise data available');
-        }
+      const bundled = await fetch('./assets/data/exercises.json')
+        .then(r => (r.ok ? r.json() : null))
+        .catch(() => null);
+      if (bundled) {
+        await ExerciseStorage.save(bundled);
+        this.exercises = bundled;
       } else {
-        this.exercises = stored;
-        console.log(`App: Loaded ${stored.length} exercises from storage`);
+        this.exercises = await ExerciseStorage.load();
       }
     } catch (e) {
       console.error('Failed to load exercises:', e);
       this.exercises = [];
     }
-    // initial render if exercise view is already visible (should be hidden)
-    this.renderExercises();
+    this.applyFilters();
+  },
+
+  watchNetwork() {
+    const el = document.getElementById('net-state');
+    const update = () => {
+      el.textContent = navigator.onLine ? 'Offline pronto' : 'Senza rete: tutto disponibile';
+    };
+    window.addEventListener('online', update);
+    window.addEventListener('offline', update);
+    update();
   },
 
   bindEvents() {
-    const enterFieldBtn = document.getElementById('enter-field-btn');
-    if (enterFieldBtn) {
-      enterFieldBtn.addEventListener('click', () => this.enterFieldMode());
-    }
+    document.getElementById('complete-op-btn')
+      .addEventListener('click', () => this.returnToBase());
+    document.getElementById('show-rations-btn')
+      .addEventListener('click', () => this.showScreen('logistics-mode'));
+    document.getElementById('show-exercises-btn')
+      .addEventListener('click', () => this.showScreen('exercises-section'));
+  },
 
-    const nextPhaseBtn = document.getElementById('next-phase-btn');
-    if (nextPhaseBtn) {
-      nextPhaseBtn.addEventListener('click', () => FieldManager.nextPhase());
-    }
-
-    const completeOpBtn = document.getElementById('complete-op-btn');
-    if (completeOpBtn) {
-      completeOpBtn.addEventListener('click', () => this.exitFieldMode());
-    }
+  showScreen(id) {
+    FieldManager.stopTimer();
+    ['logistics-mode', 'field-mode', 'exercises-section'].forEach(s =>
+      document.getElementById(s).classList.toggle('hidden', s !== id));
+    document.getElementById('show-rations-btn').classList.toggle('is-active', id === 'logistics-mode');
+    document.getElementById('show-exercises-btn').classList.toggle('is-active', id === 'exercises-section');
+    document.querySelector('.tabbar').classList.toggle('hidden', id === 'field-mode');
+    window.scrollTo(0, 0);
   },
 
   async setupLogisticsUI() {
     const rationListEl = document.getElementById('ration-list');
-    if (!rationListEl) return;
-
     try {
-      const rations = await LogisticsManager.listLocalRations();
+      const ids = await LogisticsManager.listLocalRations();
+      const rations = (await Promise.all(ids.map(id => StorageService.getRation(id))))
+        .filter(Boolean)
+        .sort((a, b) => a.id.localeCompare(b.id));
+
       if (rations.length === 0) {
-        rationListEl.innerHTML = '<div class="ration-item">NO RATIONS LOADED</div>';
+        rationListEl.innerHTML = '<p class="empty">Nessuna razione sul telefono. Apri l\'app una volta con la rete per scaricarle.</p>';
         return;
       }
 
-      // Simple render of available rations
-      rationListEl.innerHTML = rations.map(id => `
-        <div class="ration-item">
-          <span>RATION_${id}</span>
-          <span>[READY]</span>
-        </div>
+      rationListEl.innerHTML = rations.map(r => `
+        <article class="ration">
+          <div class="ration-band">
+            <span class="ration-code">${r.code}</span>
+            <div>
+              <h2 class="ration-title">${r.title}</h2>
+              <p class="ration-meta">${r.players}, ${r.durationMin} minuti</p>
+            </div>
+          </div>
+          <div class="ration-body">
+            <p>${r.summary}</p>
+            <h3>Contenuto</h3>
+            <ol class="ration-phases">
+              ${r.phases.map(p => `<li><span>${p.title}</span><span>${p.duration}′</span></li>`).join('')}
+            </ol>
+            <h3>Serve</h3>
+            <p class="ration-kit">${r.equipment.join(', ')}. ${r.place}.</p>
+            <button class="btn-primary" data-ration="${r.id}">Apri la razione</button>
+          </div>
+        </article>
       `).join('');
+
+      rationListEl.querySelectorAll('[data-ration]').forEach(btn =>
+        btn.addEventListener('click', () => this.enterFieldMode(btn.dataset.ration)));
     } catch (e) {
       console.error('Failed to setup logistics UI:', e);
     }
   },
 
-  async enterFieldMode() {
-    console.log('App: Requesting transition to FIELD MODE...');
-
+  async enterFieldMode(rationId) {
     try {
-      const rations = await LogisticsManager.listLocalRations();
-      if (rations.length === 0) {
-        alert('CRITICAL ERROR: No active rations found. Logistics failure.');
-        return;
+      const ration = await StorageService.getRation(rationId);
+      if (!ration) {
+        throw new Error('Razione non trovata sul telefono.');
       }
-
-      // Use the first available ration as the active one
-      const activeRationId = rations[0];
-      const activeRation = await StorageService.getRation(activeRationId);
-
-      if (!activeRation) {
-        throw new Error('Active ration data is corrupted or missing.');
-      }
-
-      await this.transitionToFieldMode(activeRation);
-
+      this.showScreen('field-mode');
+      await FieldManager.initSession(ration);
     } catch (error) {
       console.error('Transition failed:', error);
-      alert(`TRANSITION FAILURE: ${error.message}`);
+      alert(error.message);
     }
   },
 
   /**
-   * Performs the UI and state transition into field mode.
-   * @param {object} ration - The ration to activate for this session.
-   */
-  async transitionToFieldMode(ration) {
-    console.log('App: Transitioning to FIELD MODE for ration:', ration.title);
-
-    // Initialize Field Session
-    await FieldManager.initSession(ration);
-
-    // UI Transition
-    document.getElementById('logistics-mode').classList.add('hidden');
-    document.getElementById('field-mode').classList.remove('hidden');
-  },
-
-  exitFieldMode() {
-    this.returnToBase();
-  },
-
-  /**
-   * Returns the application to logistics mode and prepares for sync.
+   * Returns the application to logistics mode.
    */
   returnToBase() {
-    console.log('App: Returning to LOGISTICS MODE...');
-
-    // In a real app, we would trigger a sync process here for local logs
-    console.log('App: Preparing local logs for sync...');
-
-    document.getElementById('field-mode').classList.add('hidden');
-    document.getElementById('logistics-mode').classList.remove('hidden');
-    this.setupLogisticsUI();
+    this.showScreen('logistics-mode');
   },
 
   /* ---------- Exercise UI ---------- */
 
   bindExerciseEvents() {
-    const showExercisesBtn = document.getElementById('show-exercises-btn');
-    if (showExercisesBtn) {
-      showExercisesBtn.addEventListener('click', () => this.toggleExercisesView());
-    }
-
-    const categoryFilter = document.getElementById('category-filter');
-    if (categoryFilter) {
-      categoryFilter.addEventListener('change', () => this.applyFilters());
-    }
+    document.getElementById('category-filter')
+      .addEventListener('change', () => this.applyFilters());
 
     const ageFilter = document.getElementById('age-filter');
-    if (ageFilter) {
-      const ageValueSpan = document.getElementById('age-value');
-      if (ageValueSpan) {
-        ageFilter.addEventListener('input', () => {
-          ageValueSpan.textContent = ageFilter.value;
-          this.applyFilters();
-        });
-      }
-    }
+    const ageValueSpan = document.getElementById('age-value');
+    ageFilter.addEventListener('input', () => {
+      ageValueSpan.textContent = ageFilter.value;
+      this.applyFilters();
+    });
 
-    const participantsFilter = document.getElementById('participants-filter');
-    if (participantsFilter) {
-      participantsFilter.addEventListener('input', () => this.applyFilters());
-    }
-  },
-
-  toggleExercisesView() {
-    const logistics = document.getElementById('logistics-mode');
-    const field = document.getElementById('field-mode');
-    const exercisesSection = document.getElementById('exercises-section');
-
-    // hide other modes
-    if (logistics) logistics.classList.add('hidden');
-    if (field)    field.classList.add('hidden');
-    // show exercises
-    if (exercisesSection) {
-      exercisesSection.classList.remove('hidden');
-      exercisesSection.classList.add('visible');
-      this.renderExercises();
-    }
+    document.getElementById('participants-filter')
+      .addEventListener('input', () => this.applyFilters());
   },
 
   applyFilters() {
-    const categoryFilter = document.getElementById('category-filter');
-    const ageFilter = document.getElementById('age-filter');
-    const participantsFilter = document.getElementById('participants-filter');
-
-    const cat = categoryFilter ? categoryFilter.value : 'all';
-    const maxAge = ageFilter ? parseInt(ageFilter.value, 10) : 45;
-    const minParticipants = participantsFilter ? parseInt(participantsFilter.value, 10) : 1;
+    const cat = document.getElementById('category-filter').value;
+    const age = parseInt(document.getElementById('age-filter').value, 10);
+    const players = parseInt(document.getElementById('participants-filter').value, 10) || 1;
 
     const filtered = this.exercises.filter(ex => {
       if (cat !== 'all' && ex.category !== cat) return false;
-      // age filter: user selects maximum age they want; exercise suitable if its min age <= maxAge
-      if (ex.ageMin > maxAge) return false;
-      // participants filter: user selects minimum participants they have; exercise suitable if its participantsMin <= participantsFilter? Actually we have participantsMin as minimum needed. If user says they have X participants, exercise needs participantsMin <= X.
-      if (ex.participantsMin > minParticipants) return false;
+      // exercise suitable if the selected age is at or above its minimum age
+      if (ex.ageMin > age) return false;
+      // exercise suitable if the available players cover its minimum
+      if (ex.participantsMin > players) return false;
       return true;
     });
 
@@ -216,27 +175,27 @@ const App = {
 
   /**
    * Render exercise cards into the grid.
-   * @param {Array} list - optional array to render; if undefined, use this.exercises
+   * @param {Array} list - array to render
    */
   renderExercises(list) {
     const grid = document.getElementById('exercises-grid');
-    if (!grid) return;
-    const data = Array.isArray(list) ? list : this.exercises;
-    if (data.length === 0) {
-      grid.innerHTML = '<p class="no-exercises">No exercises match the current filters.</p>';
+    if (list.length === 0) {
+      grid.innerHTML = '<p class="empty">Nessun esercizio con questi filtri. Aumenta età o giocatori disponibili.</p>';
       return;
     }
-    grid.innerHTML = data.map(ex => `
-      <div class="exercise-card">
-        <h3>${ex.title}</h3>
-        <div class="meta">
-          <span>${ex.category}</span>
-          <span>${ex.ageMin}+</span>
-          <span>${ex.participantsMin}+ players</span>
+    grid.innerHTML = list.map(ex => `
+      <details class="exercise-card">
+        <summary>
+          <span class="exercise-area">${CATEGORY_LABELS[ex.category] || ex.category}</span>
+          <h3>${ex.title}</h3>
+          <p>${ex.description}</p>
+          <span class="exercise-meta">Da ${ex.ageMin} anni, ${ex.participantsMin === 1 ? 'anche da solo' : `almeno ${ex.participantsMin} giocatori`}</span>
+        </summary>
+        <div class="exercise-detail">
+          <p>${ex.instructions}</p>
+          ${ex.equipment.length ? `<p class="exercise-kit">Serve: ${ex.equipment.join(', ')}</p>` : '<p class="exercise-kit">Nessuna attrezzatura</p>'}
         </div>
-        <p>${ex.description}</p>
-        <div class="source"><em>${ex.source}</em></div>
-      </div>
+      </details>
     `).join('');
   }
 };
