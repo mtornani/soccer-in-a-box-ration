@@ -82,6 +82,10 @@ button {
     margin: 0.5rem 0 1.5rem;
     color: var(--ink-soft);
 }
+.draft-note {
+    font-size: 0.9rem;
+    color: var(--ink-soft);
+}
 .empty {
     padding: 1rem 0;
     color: var(--ink-soft);

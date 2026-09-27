@@ -12,7 +12,7 @@
       "muro"
     ],
     "instructions": "Alterna i piedi ogni 10 passaggi. Il controllo deve portare la palla verso uno spazio libero, mai sotto i piedi.",
-    "source": "Contenuto originale Soccer in a Box"
+    "source": "Bozza Soccer in a Box, da validare"
   },
   {
     "id": "ex002",
@@ -27,7 +27,7 @@
       "4 segnali"
     ],
     "instructions": "Segnali in fila a 1,5 metri. Usa interno ed esterno dello stesso piede. 8 serie da 30 secondi.",
-    "source": "Contenuto originale Soccer in a Box"
+    "source": "Bozza Soccer in a Box, da validare"
   },
   {
     "id": "ex003",
@@ -41,7 +41,7 @@
       "pallone"
     ],
     "instructions": "Solo piede destro, solo sinistro, alternati, poi coscia e testa. Annota il record.",
-    "source": "Contenuto originale Soccer in a Box"
+    "source": "Bozza Soccer in a Box, da validare"
   },
   {
     "id": "ex004",
@@ -56,7 +56,7 @@
       "muro"
     ],
     "instructions": "A 2 metri dal muro. Colpisci con la fronte, occhi aperti, collo fermo. 3 serie da 10.",
-    "source": "Contenuto originale Soccer in a Box"
+    "source": "Bozza Soccer in a Box, da validare"
   },
   {
     "id": "ex005",
@@ -72,7 +72,7 @@
       "gesso o nastro"
     ],
     "instructions": "10 tiri per piede e per tipo di colpo. Conta i centri.",
-    "source": "Contenuto originale Soccer in a Box"
+    "source": "Bozza Soccer in a Box, da validare"
   },
   {
     "id": "ex006",
@@ -86,7 +86,7 @@
       "pallone"
     ],
     "instructions": "Lanci a varie altezze. Obiettivo: palla ferma entro un passo in un solo tocco.",
-    "source": "Contenuto originale Soccer in a Box"
+    "source": "Bozza Soccer in a Box, da validare"
   },
   {
     "id": "ex007",
@@ -100,7 +100,7 @@
       "2 segnali"
     ],
     "instructions": "8 ripetizioni, circa 40 secondi di recupero. Interrompi se la velocità cala molto.",
-    "source": "Contenuto originale Soccer in a Box"
+    "source": "Bozza Soccer in a Box, da validare"
   },
   {
     "id": "ex008",
@@ -114,7 +114,7 @@
       "3 segnali"
     ],
     "instructions": "Parti dal centro, tocca il segnale a destra, poi quello a sinistra, torna al centro. 6 ripetizioni.",
-    "source": "Contenuto originale Soccer in a Box"
+    "source": "Bozza Soccer in a Box, da validare"
   },
   {
     "id": "ex009",
@@ -126,7 +126,7 @@
     "participantsMin": 1,
     "equipment": [],
     "instructions": "3 serie da 6 salti per tipo. Atterra morbido, ginocchia in linea con le punte. Qualità, non quantità.",
-    "source": "Contenuto originale Soccer in a Box"
+    "source": "Bozza Soccer in a Box, da validare"
   },
   {
     "id": "ex010",
@@ -138,7 +138,7 @@
     "participantsMin": 1,
     "equipment": [],
     "instructions": "40 secondi di lavoro, 20 di pausa, 3 giri. Adatto a qualsiasi spazio, anche al chiuso.",
-    "source": "Contenuto originale Soccer in a Box"
+    "source": "Bozza Soccer in a Box, da validare"
   },
   {
     "id": "ex011",
@@ -152,7 +152,7 @@
       "2 segnali"
     ],
     "instructions": "2 blocchi da 6 minuti. Ritmo costante per tutte le ripetizioni.",
-    "source": "Contenuto originale Soccer in a Box"
+    "source": "Bozza Soccer in a Box, da validare"
   },
   {
     "id": "ex012",
@@ -167,7 +167,7 @@
       "4 segnali"
     ],
     "instructions": "Chi sbaglia entra. Blocchi da 90 secondi. Sempre due linee di passaggio aperte.",
-    "source": "Contenuto originale Soccer in a Box"
+    "source": "Bozza Soccer in a Box, da validare"
   },
   {
     "id": "ex013",
@@ -183,7 +183,7 @@
       "casacche"
     ],
     "instructions": "Campo 30 × 25. 8 passaggi consecutivi valgono un punto. Allarga il campo in possesso, stringi in non possesso.",
-    "source": "Contenuto originale Soccer in a Box"
+    "source": "Bozza Soccer in a Box, da validare"
   },
   {
     "id": "ex014",
@@ -199,7 +199,7 @@
       "casacche"
     ],
     "instructions": "Gol in transizione vale doppio. Chi perde palla pressa subito per 5 secondi.",
-    "source": "Contenuto originale Soccer in a Box"
+    "source": "Bozza Soccer in a Box, da validare"
   },
   {
     "id": "ex015",
@@ -215,7 +215,7 @@
       "porta"
     ],
     "instructions": "Difensori larghi, portiere come terzo uomo. Se gli attaccanti recuperano, tirano in porta.",
-    "source": "Contenuto originale Soccer in a Box"
+    "source": "Bozza Soccer in a Box, da validare"
   },
   {
     "id": "ex016",
@@ -230,7 +230,7 @@
       "4 segnali"
     ],
     "instructions": "Il difensore si posiziona di lato, non frontale, e porta l'avversario sul piede debole.",
-    "source": "Contenuto originale Soccer in a Box"
+    "source": "Bozza Soccer in a Box, da validare"
   },
   {
     "id": "ex017",
@@ -245,7 +245,7 @@
       "muro"
     ],
     "instructions": "Scegli una parola breve (per esempio \"prossima\"). Serve a staccare l'attenzione dall'errore in meno di 3 secondi.",
-    "source": "Contenuto originale Soccer in a Box"
+    "source": "Bozza Soccer in a Box, da validare"
   },
   {
     "id": "ex018",
@@ -259,7 +259,7 @@
       "carta e penna"
     ],
     "instructions": "Esempio: \"controllo orientato col sinistro\". Rileggi gli ultimi 5 obiettivi ogni settimana.",
-    "source": "Contenuto originale Soccer in a Box"
+    "source": "Bozza Soccer in a Box, da validare"
   },
   {
     "id": "ex019",
@@ -274,7 +274,7 @@
       "porta o muro"
     ],
     "instructions": "Inspira 4 secondi, espira 6. Guarda l'angolo scelto, poi solo la palla. 10 rigori a seduta.",
-    "source": "Contenuto originale Soccer in a Box"
+    "source": "Bozza Soccer in a Box, da validare"
   },
   {
     "id": "ex020",
@@ -286,6 +286,6 @@
     "participantsMin": 4,
     "equipment": [],
     "instructions": "Una frase a testa, concreta. L'allenatore parla per ultimo.",
-    "source": "Contenuto originale Soccer in a Box"
+    "source": "Bozza Soccer in a Box, da validare"
   }
 ]

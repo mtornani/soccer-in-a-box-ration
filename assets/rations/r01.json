@@ -87,5 +87,6 @@
       ],
       "map": "<svg viewBox='0 0 200 120' xmlns='http://www.w3.org/2000/svg'><rect class='f' x='4' y='4' width='192' height='112'/><circle class='p' cx='100' cy='60' r='5'/><circle class='r' cx='100' cy='60' r='30'/></svg>"
     }
-  ]
+  ],
+  "status": "bozza, da validare"
 }

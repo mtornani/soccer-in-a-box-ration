@@ -73,7 +73,7 @@ export const Ration: React.FC = () => {
 
       <Appear at={122} name="Offline" style={{ position: "absolute", bottom: 130, left: 96, right: 96 }}>
         <div style={{ fontFamily: SANS, fontWeight: 600, fontSize: 48, color: C.ink }}>
-          Funziona senza rete.
+          Dopo il primo avvio, funziona senza rete.
         </div>
       </Appear>
     </AbsoluteFill>

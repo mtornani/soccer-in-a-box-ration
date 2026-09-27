@@ -88,5 +88,6 @@
       ],
       "map": "<svg viewBox='0 0 200 120' xmlns='http://www.w3.org/2000/svg'><rect class='f' x='4' y='4' width='192' height='112'/><circle class='p' cx='135' cy='60' r='5'/><circle class='p' cx='124' cy='84' r='5'/><circle class='p' cx='100' cy='94' r='5'/><circle class='p' cx='76' cy='84' r='5'/><circle class='p' cx='66' cy='60' r='5'/><circle class='p' cx='76' cy='36' r='5'/><circle class='p' cx='100' cy='26' r='5'/><circle class='p' cx='124' cy='36' r='5'/></svg>"
     }
-  ]
+  ],
+  "status": "bozza, da validare"
 }

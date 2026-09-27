@@ -50,11 +50,11 @@ export const Together: React.FC = () => {
       </div>
       <Appear at={120} name="Fit" style={{ marginTop: 40 }}>
         <div style={{ fontFamily: SANS, fontWeight: 600, fontSize: 48, lineHeight: 1.3, color: C.ink }}>
-          L'obiettivo della fase, verificato dal dato.
+          L’idea: l’obiettivo della fase, verificato dal dato.
         </div>
       </Appear>
       <Appear at={120} name="Disclaimer" style={{ position: "absolute", bottom: 110, left: 96 }}>
-        <div style={{ fontFamily: SANS, fontSize: 32, color: C.inkSoft }}>Dati illustrativi</div>
+        <div style={{ fontFamily: SANS, fontSize: 32, color: C.inkSoft }}>Dati illustrativi. L’integrazione non esiste ancora.</div>
       </Appear>
       <FadeBar />
     </AbsoluteFill>

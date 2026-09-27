@@ -1,5 +1,5 @@
 // Service Worker for SoccerInABox PWA
-const CACHE_STATIC = 'static-v3';
+const CACHE_STATIC = 'static-v4';
 const CACHE_DATA = 'data-v3';
 // Relative to the SW scope, so the app also works from a sub-path.
 const ASSETS_TO_CACHE = [

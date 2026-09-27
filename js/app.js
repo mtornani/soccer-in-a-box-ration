@@ -47,13 +47,23 @@ const App = {
     this.applyFilters();
   },
 
+  /**
+   * Shows whether the app can really work without network: only once the
+   * service worker controls the page are all files cached.
+   */
   watchNetwork() {
     const el = document.getElementById('net-state');
     const update = () => {
-      el.textContent = navigator.onLine ? 'Offline pronto' : 'Senza rete: tutto disponibile';
+      const cached = Boolean(navigator.serviceWorker?.controller);
+      if (!navigator.onLine) {
+        el.textContent = cached ? 'Senza rete: tutto disponibile' : 'Senza rete';
+      } else {
+        el.textContent = cached ? 'Pronto anche senza rete' : 'Primo avvio: serve la rete';
+      }
     };
     window.addEventListener('online', update);
     window.addEventListener('offline', update);
+    navigator.serviceWorker?.addEventListener('controllerchange', update);
     update();
   },
 

@@ -32,9 +32,9 @@ export const Close: React.FC = () => {
       />
       <Appear at={110} name="Signature" style={{ marginTop: 40 }}>
         <div style={{ fontFamily: SANS, fontSize: 44, lineHeight: 1.35, color: C.chalk }}>
-          Soccer in a Box, una proposta per K-Fans.
+          Soccer in a Box è un prototipo funzionante.
           <br />
-          Mirko Tornani, allenatore.
+          Una proposta per K-Fans di Mirko Tornani.
         </div>
       </Appear>
     </AbsoluteFill>
