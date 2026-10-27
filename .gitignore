@@ -2,3 +2,11 @@
 .playwright-mcp/
 node_modules/
 video/out/
+
+# security hygiene
+.env
+.env.*
+!.env.example
+*.local.json
+__pycache__/
+node_modules/
